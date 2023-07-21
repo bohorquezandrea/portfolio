@@ -1,0 +1,36 @@
+
+.linkedin {
+    background-image: url(../assets/linkedin.avif);
+    background-blend-mode:multiply; 
+}
+
+.instagram {
+    background-image: url(../assets/instagram.avif);
+    background-blend-mode:multiply; 
+}
+
+.github {
+    background-image: url(../assets/github.avif);
+    background-blend-mode:multiply; 
+}
+
+h1 {
+    font-family: 'Sacramento', cursive;
+    font-weight: 600;
+    font-size: 60px;
+    color: #FCDF57
+}
+
+h3{
+    font-family: 'Sacramento', cursive;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+a{
+    color: white; 
+    text-decoration: none;
+}
+

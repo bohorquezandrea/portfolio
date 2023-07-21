@@ -1,0 +1,20 @@
+.container {
+    display: flex;
+}
+
+.logo {
+    justify-content: center;
+    align-items: center;
+}
+
+#UN {
+    background-color: #FCDF57;
+}
+
+h1 {
+    font-family: 'Sacramento', cursive;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}

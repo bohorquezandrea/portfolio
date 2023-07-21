@@ -1,0 +1,45 @@
+
+.languages {
+    background-image: url(../assets/worldglobe.avif);
+    background-blend-mode:multiply; 
+}
+
+.coding {
+    background-image: url(../assets/coding.avif);
+    background-blend-mode:multiply; 
+}
+
+.ms-office {
+    background-image: url(../assets/excel.avif);
+    background-blend-mode:multiply; 
+}
+
+.organization {
+    background-image: url(../assets/organization.avif);
+    background-blend-mode:multiply; 
+}
+
+.discipline {
+    background-image: url(../assets/handstand.avif);
+    background-blend-mode:multiply; 
+}
+
+.teamwork {
+    background-image: url(../assets/teamwork.avif);
+    background-blend-mode:multiply; 
+}
+
+h1 {
+    font-family: 'Sacramento', cursive;
+    font-weight: 600;
+    font-size: 60px;
+    color: #FCDF57
+}
+
+h3{
+    font-family: 'Sacramento', cursive;
+}
+
+p {
+    font-family: Arial, Helvetica, sans-serif;
+}
