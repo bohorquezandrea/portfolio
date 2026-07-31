@@ -118,5 +118,5 @@ contenido, no por la extensión, así que funciona igual.
 
 ## Lo que ya no necesitas mandarme
 
-- **Favicon**: generado desde tu logo, ya está en `public/favicon.svg`.
+- **Favicon**: generado desde tu logo, ya está en `public/favicon-32.png` y `public/favicon-180.png`.
 - **Logo**: optimizado y vectorizado. Pasó de 165 KB a 5,8 KB.
