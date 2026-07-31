@@ -22,15 +22,16 @@ export const content = {
     },
     hero: {
       eyebrow: 'Andrea Bohorquez · Barranquilla, Colombia',
-      titleWords: ['AI', 'Product', 'Engineer'],
-      titleEmphasis: 'Full-Stack Web Developer.',
-      sub: 'Construyo aplicaciones completas, del modelo de datos a la interfaz, y automatizo con IA el trabajo repetitivo que no debería hacer una persona. Ingeniera mecánica con máster en desarrollo web.',
+      titleWords: ['Webs', 'y', 'automatizaciones'],
+      titleEmphasis: 'a la medida de tu negocio.',
+      roleLine: 'AI Product Engineer · Full-Stack Web Developer',
+      sub: 'Diseño y construyo el sitio o la aplicación que tu marca necesita, y automatizo con IA el trabajo repetitivo de tu operación. Sin plantillas genéricas y sin atajos.',
       ctaPrimary: 'Empecemos tu proyecto',
       ctaSecondary: 'Ver proyectos',
       stats: [
-        { num: '47', label: 'Tests automatizados en PlanEat' },
-        { num: '~15h', label: 'Semanales automatizadas con IA' },
-        { num: '6+', label: 'Marcas que ya confiaron' }
+        { num: '6+', label: 'Marcas que ya confiaron' },
+        { num: '4d', label: 'Entrega promedio de una landing' },
+        { num: '~15h', label: 'Semanales ahorradas automatizando' }
       ],
       scrollWord: 'desliza',
       scrollLine: '· hay mucho por mostrarte ·'
@@ -489,8 +490,7 @@ export const content = {
       menuTitle: 'Menú',
       linkedin: 'https://www.linkedin.com/in/andrea-bohórquez-ab34bb15b',
       github: 'https://github.com/bohorquezandrea',
-      copy: '© 2026 Andrea Bohorquez · Hecho a mano con React',
-      built: 'Diseñado y construido con código'
+      copy: '© 2026 Andrea Bohorquez'
     }
   },
 
@@ -510,15 +510,16 @@ export const content = {
     },
     hero: {
       eyebrow: 'Andrea Bohorquez · Barranquilla, Colombia',
-      titleWords: ['AI', 'Product', 'Engineer'],
-      titleEmphasis: 'Full-Stack Web Developer.',
-      sub: 'I build complete applications, from the data model to the interface, and use AI to automate the repetitive work no person should be doing. Mechanical engineer with a master’s in web development.',
+      titleWords: ['Websites', 'and', 'automation'],
+      titleEmphasis: 'built around your business.',
+      roleLine: 'AI Product Engineer · Full-Stack Web Developer',
+      sub: 'I design and build the site or app your brand needs, and use AI to automate the repetitive work in your operation. No generic templates, no shortcuts.',
       ctaPrimary: 'Start your project',
       ctaSecondary: 'See work',
       stats: [
-        { num: '47', label: 'Automated tests in PlanEat' },
-        { num: '~15h', label: 'Weekly hours automated with AI' },
-        { num: '6+', label: 'Brands trusted' }
+        { num: '6+', label: 'Brands trusted' },
+        { num: '4d', label: 'Average landing delivery' },
+        { num: '~15h', label: 'Weekly hours saved by automating' }
       ],
       scrollWord: 'scroll',
       scrollLine: '· there’s plenty more to see ·'
@@ -977,8 +978,7 @@ export const content = {
       menuTitle: 'Menu',
       linkedin: 'https://www.linkedin.com/in/andrea-bohórquez-ab34bb15b',
       github: 'https://github.com/bohorquezandrea',
-      copy: '© 2026 Andrea Bohorquez · Handmade with React',
-      built: 'Designed and built with code'
+      copy: '© 2026 Andrea Bohorquez'
     }
   }
 };
