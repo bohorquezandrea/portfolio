@@ -1,5 +1,5 @@
 // =============================================================
-// i18n. Copy escrito para CEO o dueñ@ de negocio (no developer).
+// i18n. Copy escrito para quien dirige un negocio (no developer).
 // Sin promesas de venta (no soy marketer).
 // Sin precios en la web (cotizo en propuesta privada).
 // Dos idiomas: Español (default) y English.
@@ -31,7 +31,7 @@ export const content = {
       stats: [
         { num: '6+', label: 'Marcas que ya confiaron' },
         { num: '4d', label: 'Entrega promedio de una landing' },
-        { num: '~15h', label: 'Semanales ahorradas automatizando' }
+        { num: '4-6h', label: 'Semanales ahorradas automatizando' }
       ],
       scrollWord: 'desliza',
       scrollLine: '· hay mucho por mostrarte ·'
@@ -63,9 +63,10 @@ export const content = {
           titleEm: 'con Claude Code',
           year: '2026 · Tucan',
           role: 'AI Product Engineer',
-          desc: 'Skills propias que automatizan la maquetación y publicación de fichas de producto en VTEX a través de Nebula. Traducen HTML y CSS a la estructura que exige la plataforma, acotando cada selector para que una ficha no pueda romper los estilos de otra. Recortan alrededor de 15 horas semanales de trabajo manual.',
+          desc: 'Gestiono contenido enriquecido para marcas enterprise en VTEX. Cada landing de producto pasaba por recibir el código en crudo, adaptarlo a mano, subirlo y validarlo: dos horas por pieza. Construí un skill propio en Claude Code que recibe el código, lo adapta al formato de la plataforma y aplica las reglas de estilo de cada marca. De 2 horas a 20 minutos, entre 4 y 6 horas menos de trabajo manual cada semana.',
           stack: ['Claude Code', 'Skills', 'MCP', 'VTEX', 'Nebula', 'HTML/CSS'],
-          link: null
+          link: 'https://www.linkedin.com/feed/update/urn:li:activity:7488971086550970368/',
+          linkLabel: 'Leer el caso completo'
         },
         {
           n: '03',
@@ -109,7 +110,8 @@ export const content = {
           role: 'Front-End · JavaScript',
           desc: 'El juego de memoria clásico: secuencias generadas, captura de input del jugador y control del estado de la partida en JavaScript puro, sin librerías.',
           stack: ['JavaScript', 'DOM', 'CSS'],
-          link: null
+          link: 'https://bohorquezandrea.github.io/simongame/',
+          linkLabel: 'Jugar'
         }
       ]
     },
@@ -118,7 +120,7 @@ export const content = {
       title: 'Lo que automatizo',
       titleEm: 'con IA.',
       sub: 'No uso IA para escribir el mismo código más rápido. La uso para construir herramientas que hacen el trabajo repetitivo sin mí, y que siguen funcionando cuando cierro el portátil.',
-      stat: { num: '~15h', label: 'de trabajo manual eliminadas por semana' },
+      stat: { num: '2h → 20min', label: 'por landing de producto, tras automatizar el proceso' },
       items: [
         {
           n: '01',
@@ -170,7 +172,7 @@ export const content = {
       cta: 'Hablemos de tu proyecto'
     },
     offers: {
-      eyebrow: 'Cómo trabajamos juntas',
+      eyebrow: 'Cómo trabajamos juntos',
       title: 'Cuatro maneras de poner tu marca online',
       sub: 'Elige según el momento de tu negocio. Cada paquete incluye diseño, construcción y acompañamiento. El precio se cotiza según el alcance, sin tarifas ocultas.',
       items: [
@@ -254,7 +256,7 @@ export const content = {
       eyebrow: 'Lo que sé construir contigo',
       title: 'Donde pongo mi',
       titleEm: 'foco',
-      sub: 'Estos son los terrenos en los que me muevo cuando trabajamos juntas. Nada de marketing ni promesas de venta. Sólo diseño y construcción de la pieza digital.',
+      sub: 'Estos son los terrenos en los que me muevo cuando trabajamos juntos. Nada de marketing ni promesas de venta. Sólo diseño y construcción de la pieza digital.',
       slides: [
         {
           n: '01',
@@ -435,7 +437,7 @@ export const content = {
           p: 'Publicación en tu dominio, capacitación 1‑a‑1 y soporte post‑lanzamiento. Te quedas con todo entendido.'
         }
       ],
-      cta: 'Empecemos juntas'
+      cta: 'Empecemos juntos'
     },
     guarantee: {
       seal: 'Mi promesa',
@@ -519,7 +521,7 @@ export const content = {
       stats: [
         { num: '6+', label: 'Brands trusted' },
         { num: '4d', label: 'Average landing delivery' },
-        { num: '~15h', label: 'Weekly hours saved by automating' }
+        { num: '4-6h', label: 'Weekly hours saved by automating' }
       ],
       scrollWord: 'scroll',
       scrollLine: '· there’s plenty more to see ·'
@@ -551,9 +553,10 @@ export const content = {
           titleEm: 'with Claude Code',
           year: '2026 · Tucan',
           role: 'AI Product Engineer',
-          desc: 'Custom skills that automate building and publishing product pages on VTEX through Nebula. They translate HTML and CSS into the structure the platform requires, scoping every selector so one product page cannot break another one’s styles. They cut around 15 hours of manual work per week.',
+          desc: 'I manage rich content for enterprise brands on VTEX. Every product landing meant receiving raw code, adapting it by hand, uploading and validating it: two hours per piece. I built a custom Claude Code skill that takes the raw code, adapts it to the platform format and applies each brand’s style rules. From 2 hours to 20 minutes, and 4 to 6 fewer hours of manual work every week.',
           stack: ['Claude Code', 'Skills', 'MCP', 'VTEX', 'Nebula', 'HTML/CSS'],
-          link: null
+          link: 'https://www.linkedin.com/feed/update/urn:li:activity:7488971086550970368/',
+          linkLabel: 'Read the full case'
         },
         {
           n: '03',
@@ -597,7 +600,8 @@ export const content = {
           role: 'Front-End · JavaScript',
           desc: 'The classic memory game: generated sequences, player input capture and game state control in plain JavaScript, no libraries.',
           stack: ['JavaScript', 'DOM', 'CSS'],
-          link: null
+          link: 'https://bohorquezandrea.github.io/simongame/',
+          linkLabel: 'Play it'
         }
       ]
     },
@@ -606,7 +610,7 @@ export const content = {
       title: 'What I automate',
       titleEm: 'with AI.',
       sub: 'I do not use AI to write the same code faster. I use it to build tools that do the repetitive work without me, and keep working after I close the laptop.',
-      stat: { num: '~15h', label: 'of manual work removed per week' },
+      stat: { num: '2h → 20min', label: 'per product landing, after automating the process' },
       items: [
         {
           n: '01',

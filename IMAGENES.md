@@ -100,14 +100,6 @@ Estas medidas no son negociables: es el estándar de Open Graph y si no
 coincide, las plataformas la recortan mal. Si quieres te la genero yo con
 tu nombre, el cargo y el logo sobre el verde de marca; dime y la hago.
 
-## 4. Foto profesional (para el CV web y el README de GitHub)
-
-| Archivo | Dimensiones | Peso máx | Formato |
-|---|---|---|---|
-| `retrato.jpg` | **800 × 800** (cuadrada) | 100 KB | JPG o WebP |
-
-Puedes reusar la misma del CV. Recórtala cuadrada, centrada en la cara,
-con algo de aire arriba.
 
 ---
 
