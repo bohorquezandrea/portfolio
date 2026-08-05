@@ -98,23 +98,59 @@ GitHub compila y publica solo. No tienes que subir la carpeta `dist`.
 
 ---
 
-## Si prefieres que el portfolio quede en la raíz
+## Conectar andreabohorquez.co (GoDaddy)
 
-Ahora mismo queda en `bohorquezandrea.github.io/portfolio/`. Si lo quieres
-en `bohorquezandrea.github.io` a secas, tienes que publicarlo en un repo
-llamado exactamente `bohorquezandrea.github.io`, y cambiar una línea:
+El proyecto ya está configurado para el dominio: la ruta base es `/` y
+hay un archivo `public/CNAME` con `andreabohorquez.co`, que es lo que le
+dice a GitHub qué dominio sirve este repo.
 
-En `vite.config.js`, esta línea:
+### En GoDaddy
 
-```js
-const base = process.env.BASE ?? '/portfolio/';
+Entra a tu dominio → **DNS** → **Administrar zonas DNS**.
+
+Crea **cuatro registros A**, todos con nombre `@`, apuntando a las IP de
+GitHub Pages:
+
+| Tipo | Nombre | Valor |
+|---|---|---|
+| A | @ | 185.199.108.153 |
+| A | @ | 185.199.109.153 |
+| A | @ | 185.199.110.153 |
+| A | @ | 185.199.111.153 |
+
+Y **un CNAME** para el subdominio www:
+
+| Tipo | Nombre | Valor |
+|---|---|---|
+| CNAME | www | bohorquezandrea.github.io |
+
+Si ya existe un registro A con nombre `@` apuntando a otra cosa (GoDaddy
+suele poner uno de aparcamiento), bórralo primero.
+
+### En GitHub
+
+1. Repo → **Settings** → **Pages**
+2. En **Custom domain**, escribe `andreabohorquez.co` → **Save**
+3. Espera a que verifique (unos minutos) y marca **Enforce HTTPS**
+
+El DNS puede tardar entre 10 minutos y varias horas en propagarse. Para
+comprobarlo:
+
+```bash
+dig andreabohorquez.co +short
 ```
 
-pasa a:
+Debe devolver las cuatro IP de arriba.
 
-```js
-const base = process.env.BASE ?? '/';
-```
+### Cuando tengas el .com
+
+1. Cambias `public/CNAME` a `andreabohorquez.com`
+2. Repites los registros A en el DNS del .com
+3. Actualizas el Custom domain en GitHub
+4. En el .co configuras un **reenvío de dominio** (Domain Forwarding) hacia
+   el .com, con redirección permanente 301
+
+Así el .co queda solo como redirección y no consume tu plan de un dominio.
 
 ---
 

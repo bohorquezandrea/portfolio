@@ -2,14 +2,12 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig(({ command }) => ({
-  // En produccion el sitio cuelga de bohorquezandrea.github.io/portfolio/,
-  // asi que los assets NO estan en la raiz del dominio y hay que reescribir
-  // las rutas. En desarrollo se sirve desde la raiz: si aqui tambien se
-  // aplicara la subruta, http://localhost:5173/ devolveria 404 y habria que
-  // entrar a /portfolio/ a mano.
-  // Para publicar en la raiz (repo bohorquezandrea.github.io):
-  //   BASE=/ npm run build
-  base: command === 'build' ? (process.env.BASE ?? '/portfolio/') : '/',
+  // El sitio se publica en un dominio propio (andreabohorquez.co), asi que
+  // vive en la RAIZ y la base es '/'. Si alguna vez se sirviera desde
+  // bohorquezandrea.github.io/portfolio/ habria que compilar con
+  // BASE=/portfolio/ npm run build, porque ahi los assets no cuelgan de la
+  // raiz del dominio.
+  base: process.env.BASE ?? '/',
 
   plugins: [react()],
 
