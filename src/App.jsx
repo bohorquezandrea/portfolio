@@ -273,13 +273,20 @@ function Marquee({ t }) {
   return (
     <div className="marquee" aria-hidden="false">
       <span className="label">{t.marquee.label}</span>
-      <div className="track">
-        {loop.map((label, i) => (
-          <React.Fragment key={i}>
-            <span>{label}</span>
-            <span className="sep">◆</span>
-          </React.Fragment>
-        ))}
+      {/* El track va dentro de su propia ventana con overflow hidden.
+          Antes compartia caja con la etiqueta y le pasaba por encima: el
+          z-index no bastaba porque la animacion de transform crea una capa
+          de composicion propia, que puede pintarse por delante. Con la
+          ventana, el track no puede salirse de su area. */}
+      <div className="marquee-viewport">
+        <div className="track">
+          {loop.map((label, i) => (
+            <React.Fragment key={i}>
+              <span>{label}</span>
+              <span className="sep">◆</span>
+            </React.Fragment>
+          ))}
+        </div>
       </div>
     </div>
   );

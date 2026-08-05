@@ -89,7 +89,8 @@ export const content = {
           role: 'Backend · Python',
           desc: 'API en Python para buscar y consultar información de artistas musicales a partir de una fuente externa.',
           stack: ['Python', 'REST'],
-          link: null
+          link: 'https://bohorquezandrea.github.io/artist_finder_api/',
+          linkLabel: 'Abrir la app'
         },
         {
           n: '05',
@@ -100,7 +101,8 @@ export const content = {
           role: 'Front-End · JavaScript',
           desc: 'Aplicación que consume la PokéAPI y renderiza los resultados en cliente: manejo de estados de carga y error, y construcción dinámica del DOM.',
           stack: ['JavaScript', 'Fetch API', 'HTML/CSS'],
-          link: null
+          link: 'https://bohorquezandrea.github.io/pokemon_fetch_app/',
+          linkLabel: 'Abrir la app'
         },
         {
           n: '06',
@@ -580,7 +582,8 @@ export const content = {
           role: 'Backend · Python',
           desc: 'A Python API to search and retrieve information about musical artists from an external source.',
           stack: ['Python', 'REST'],
-          link: null
+          link: 'https://bohorquezandrea.github.io/artist_finder_api/',
+          linkLabel: 'Open the app'
         },
         {
           n: '05',
@@ -591,7 +594,8 @@ export const content = {
           role: 'Front-End · JavaScript',
           desc: 'An app that consumes the PokéAPI and renders results client-side: loading and error state handling, and dynamic DOM construction.',
           stack: ['JavaScript', 'Fetch API', 'HTML/CSS'],
-          link: null
+          link: 'https://bohorquezandrea.github.io/pokemon_fetch_app/',
+          linkLabel: 'Open the app'
         },
         {
           n: '06',

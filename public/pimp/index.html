@@ -47,7 +47,11 @@ h1,h2,h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;line-
 
 /* ---------- NAV ---------- */
 nav{position:sticky;top:0;z-index:50;background:rgba(13,11,20,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;
+  /* padding-block y no el atajo `padding`: `padding:14px 0` se declara
+     despues de .wrap{padding:0 22px} y, al ser abreviada, borraba el
+     margen lateral. El logo quedaba pegado al borde. */
+  padding-block:14px}
 .brand{font-family:var(--anton);font-size:20px;text-transform:uppercase;letter-spacing:.02em}
 .nav-cta{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
   padding:11px 20px;border-radius:999px;background:var(--grad-btn);color:#0D0B14;white-space:nowrap;

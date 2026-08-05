@@ -691,13 +691,25 @@ em { font-style: normal; }
   overflow: hidden;
   display: flex; align-items: center; gap: 36px;
 }
+/* La etiqueta va fuera de la ventana del track, asi que este no puede
+   invadirla. El fondo solido remata el efecto de que los nombres
+   desaparecen al llegar a ella. */
+.marquee-viewport {
+  flex: 1 1 auto;
+  min-width: 0;
+  overflow: hidden;
+}
 .marquee .label {
+  position: relative;
+  z-index: 2;
   flex-shrink: 0;
   font-size: 11px;
   letter-spacing: 0.32em;
   text-transform: uppercase;
   color: var(--ink-muted);
+  background: var(--bg-paper);
   padding-left: 28px;
+  padding-right: 22px;
 }
 .marquee .track {
   display: flex; gap: 56px; align-items: center;
