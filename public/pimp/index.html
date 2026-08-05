@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#0D0B14">
+<title>Pimp My Shoes · Limpieza y restauración premium de calzado en Barranquilla</title>
+<meta name="description" content="Limpieza profunda, restauración y personalización de tenis en Barranquilla. Recogemos, los dejamos como nuevos y te los devolvemos. Escríbenos por WhatsApp.">
+
+<meta property="og:type" content="website">
+<meta property="og:title" content="Pimp My Shoes · Tus tenis como nuevos">
+<meta property="og:description" content="Limpieza profunda, restauración y personalización de calzado en Barranquilla.">
+<meta property="og:locale" content="es_CO">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+:root{
+  --bg:#0D0B14;
+  --surface:#151122;
+  --surface-2:#1D1730;
+  --line:#2A2242;
+  --ink:#F7F5FF;        /* 17.5:1 sobre --bg */
+  --ink-soft:#BFB8D9;   /* 9.4:1 */
+  --ink-muted:#8F86AD;  /* 5.1:1 */
+  --violeta:#8454FC;    /* del logo */
+  --cian:#54D8E4;       /* del logo, 11.5:1 */
+  --grad:linear-gradient(100deg,#8454FC 0%,#6C9CF0 48%,#54D8E4 100%);
+  /* Version para botones: el morado del logo (#8454FC) con texto oscuro
+     encima da 4.33:1, justo por debajo del 4.5 que pide AA a 13px. Se
+     aclara el arranque a #9066FF (5.15:1) sin salirse del tono. */
+  --grad-btn:linear-gradient(100deg,#9066FF 0%,#7BA6F5 48%,#54D8E4 100%);
+  --anton:'Anton',Impact,sans-serif;
+  --sans:'Inter',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+  --ease:cubic-bezier(.22,1,.36,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.6;overflow-x:hidden}
+.wrap{width:min(100%,1120px);margin:0 auto;padding:0 22px}
+@media(min-width:900px){.wrap{padding:0 44px}}
+
+h1,h2,h3{font-family:var(--anton);font-weight:400;text-transform:uppercase;line-height:.92;letter-spacing:.01em}
+.grad{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+
+/* ---------- NAV ---------- */
+nav{position:sticky;top:0;z-index:50;background:rgba(13,11,20,.86);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:14px 0}
+.brand{font-family:var(--anton);font-size:20px;text-transform:uppercase;letter-spacing:.02em}
+.nav-cta{font-size:12px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+  padding:11px 20px;border-radius:999px;background:var(--grad-btn);color:#0D0B14;white-space:nowrap;
+  text-decoration:none;transition:transform .3s var(--ease)}
+.nav-cta:hover{transform:translateY(-2px)}
+
+/* ---------- HERO ---------- */
+header{position:relative;padding:76px 0 84px;overflow:hidden}
+.glow{position:absolute;border-radius:50%;filter:blur(70px);pointer-events:none;mix-blend-mode:screen}
+.glow.a{width:420px;height:420px;background:#8454FC;opacity:.28;top:-120px;right:-90px}
+.glow.b{width:340px;height:340px;background:#54D8E4;opacity:.2;bottom:-140px;left:-110px}
+.eyebrow{position:relative;font-size:11px;font-weight:600;letter-spacing:.32em;text-transform:uppercase;color:var(--cian);margin-bottom:22px}
+h1{position:relative;font-size:clamp(52px,11.5vw,124px);margin-bottom:24px}
+.sub{position:relative;max-width:52ch;font-size:clamp(16px,2vw,19px);color:var(--ink-soft);margin-bottom:34px}
+.ctas{position:relative;display:flex;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;gap:10px;padding:16px 28px;border-radius:999px;
+  font-size:13px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;text-decoration:none;
+  transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+.btn-main{background:var(--grad-btn);color:#0D0B14;box-shadow:0 16px 40px -18px #8454FC}
+.btn-main:hover{transform:translateY(-3px);box-shadow:0 22px 50px -18px #8454FC}
+.btn-ghost{border:1px solid var(--line);color:var(--ink)}
+.btn-ghost:hover{border-color:var(--cian);color:var(--cian);transform:translateY(-3px)}
+
+.stats{position:relative;display:flex;gap:38px;flex-wrap:wrap;margin-top:52px;padding-top:30px;border-top:1px solid var(--line)}
+.stat b{display:block;font-family:var(--anton);font-size:clamp(30px,5vw,44px);line-height:1}
+.stat span{font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink-muted)}
+
+/* ---------- SERVICIOS ---------- */
+section{padding:76px 0}
+.tag{font-size:11px;font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--ink-muted);margin-bottom:14px}
+h2{font-size:clamp(32px,6vw,58px);margin-bottom:16px}
+.lead{max-width:56ch;color:var(--ink-soft);margin-bottom:44px}
+
+.grid{display:grid;gap:18px;grid-template-columns:1fr}
+@media(min-width:720px){.grid{grid-template-columns:repeat(3,1fr)}}
+.card{padding:32px 26px;background:var(--surface);border:1px solid var(--line);border-radius:16px;
+  transition:transform .4s var(--ease),border-color .4s var(--ease)}
+.card:hover{transform:translateY(-6px);border-color:var(--violeta)}
+.card .n{font-family:var(--anton);font-size:15px;color:var(--cian);letter-spacing:.1em;display:block;margin-bottom:16px}
+.card h3{font-size:23px;margin-bottom:12px}
+.card p{font-size:14.5px;color:var(--ink-soft)}
+
+/* ---------- PROCESO ---------- */
+.pasos{display:grid;gap:0;grid-template-columns:1fr;counter-reset:p}
+@media(min-width:820px){.pasos{grid-template-columns:repeat(4,1fr)}}
+.paso{position:relative;padding:28px 22px 28px 0;border-top:2px solid var(--line)}
+.paso::before{counter-increment:p;content:counter(p,decimal-leading-zero);
+  font-family:var(--anton);font-size:13px;color:var(--violeta);letter-spacing:.1em;display:block;margin-bottom:12px}
+.paso h3{font-size:19px;margin-bottom:8px}
+.paso p{font-size:14px;color:var(--ink-muted)}
+
+/* ---------- CTA FINAL ---------- */
+.final{position:relative;text-align:center;padding:92px 0;background:var(--surface);border-top:1px solid var(--line);border-bottom:1px solid var(--line);overflow:hidden}
+.final h2{font-size:clamp(36px,8vw,86px);margin-bottom:18px}
+.final p{max-width:46ch;margin:0 auto 34px;color:var(--ink-soft)}
+.final .ctas{justify-content:center}
+
+footer{padding:34px 0;font-size:13px;color:var(--ink-muted);display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap}
+footer a{color:var(--cian);text-decoration:none}
+footer a:hover{text-decoration:underline}
+
+
+/* ---------- INSTAGRAM ---------- */
+.ig-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:34px}
+.ig-handle{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;
+  letter-spacing:.06em;color:var(--cian);text-decoration:none;white-space:nowrap}
+.ig-handle:hover{text-decoration:underline}
+.ig-handle svg{width:17px;height:17px;flex:none}
+
+.ig-grid{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
+@media(min-width:640px){.ig-grid{grid-template-columns:repeat(3,1fr)}}
+@media(min-width:1000px){.ig-grid{grid-template-columns:repeat(4,1fr);gap:14px}}
+
+.ig-item{position:relative;display:block;aspect-ratio:1;overflow:hidden;border-radius:14px;
+  background:var(--surface-2);border:1px solid var(--line);text-decoration:none;
+  transition:transform .4s var(--ease),border-color .4s var(--ease)}
+.ig-item:hover{transform:translateY(-5px);border-color:var(--violeta)}
+.ig-item img{width:100%;height:100%;object-fit:cover;display:block;
+  transition:transform .6s var(--ease),filter .4s var(--ease)}
+.ig-item:hover img{transform:scale(1.06)}
+.ig-cap{position:absolute;inset:auto 0 0 0;padding:34px 14px 12px;
+  background:linear-gradient(180deg,transparent,rgba(13,11,20,.92));
+  font-size:11.5px;line-height:1.4;color:#F7F5FF;
+  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
+  opacity:0;transition:opacity .35s var(--ease)}
+.ig-item:hover .ig-cap{opacity:1}
+
+/* Respaldo cuando aun no hay feed conectado */
+.ig-fallback{position:relative;padding:56px 28px;text-align:center;border-radius:18px;
+  background:var(--surface);border:1px solid var(--line);overflow:hidden}
+.ig-fallback h3{font-size:clamp(26px,4.6vw,40px);margin-bottom:12px}
+.ig-fallback p{max-width:42ch;margin:0 auto 26px;color:var(--ink-soft);font-size:15px}
+.ig-skeleton{display:grid;gap:10px;grid-template-columns:repeat(4,1fr);max-width:420px;margin:0 auto 30px;opacity:.5}
+.ig-skeleton i{display:block;aspect-ratio:1;border-radius:10px;background:var(--grad);opacity:.22}
+.ig-skeleton i:nth-child(2){opacity:.34}
+.ig-skeleton i:nth-child(3){opacity:.28}
+.ig-skeleton i:nth-child(4){opacity:.4}
+
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="wrap nav-in">
+    <span class="brand">Pimp My <span class="grad">Shoes</span></span>
+    <a class="nav-cta" href="https://wa.me/573233376417?text=Hola%20Pimp%20My%20Shoes%2C%20quiero%20cotizar%20una%20limpieza" target="_blank" rel="noreferrer">Escríbenos</a>
+  </div>
+</nav>
+
+<header>
+  <div class="glow a"></div>
+  <div class="glow b"></div>
+  <div class="wrap">
+    <p class="eyebrow">Barranquilla · Recogemos y entregamos</p>
+    <h1>Tus tenis<br><span class="grad">como nuevos</span></h1>
+    <p class="sub">
+      Limpieza profunda, restauración y personalización de calzado. Trabajamos
+      cada par a mano, con los productos que le corresponden a cada material:
+      cuero, gamuza, malla o lona.
+    </p>
+    <div class="ctas">
+      <a class="btn btn-main" href="https://wa.me/573233376417?text=Hola%20Pimp%20My%20Shoes%2C%20quiero%20cotizar%20una%20limpieza" target="_blank" rel="noreferrer">Cotizar por WhatsApp</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/pimpmyshoes.baq/" target="_blank" rel="noreferrer">Ver trabajos en Instagram</a>
+    </div>
+
+    <div class="stats">
+      <div class="stat"><b class="grad">2.5</b><span>Años de operación</span></div>
+      <div class="stat"><b class="grad">+20</b><span>Marcas trabajadas</span></div>
+      <div class="stat"><b class="grad">3</b><span>Personas en el equipo</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="wrap">
+    <p class="tag">Qué hacemos</p>
+    <h2>Tres formas de<br>recuperar un par</h2>
+    <p class="lead">No todos los pares necesitan lo mismo. Cuéntanos qué tienes y te decimos cuál le sirve.</p>
+
+    <div class="grid">
+      <article class="card">
+        <span class="n">01</span>
+        <h3>Limpieza profunda</h3>
+        <p>Suela, entresuela, capellada y cordones. Sale la suciedad acumulada
+           que un lavado normal no toca, sin maltratar el material.</p>
+      </article>
+      <article class="card">
+        <span class="n">02</span>
+        <h3>Restauración</h3>
+        <p>Para pares desgastados: recuperación de color, tratamiento de
+           amarillamiento en suelas y reparación de detalles.</p>
+      </article>
+      <article class="card">
+        <span class="n">03</span>
+        <h3>Personalización</h3>
+        <p>Diseños a mano sobre tu par. Desde detalles pequeños hasta
+           intervenciones completas tipo patchwork.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section style="padding-top:0">
+  <div class="wrap">
+    <p class="tag">Cómo funciona</p>
+    <h2>Cuatro pasos</h2>
+    <p class="lead">Sin vueltas: nos escribes, recogemos, trabajamos y te los devolvemos.</p>
+
+    <div class="pasos">
+      <div class="paso">
+        <h3>Escríbenos</h3>
+        <p>Mándanos una foto de tus tenis por WhatsApp y te cotizamos.</p>
+      </div>
+      <div class="paso">
+        <h3>Recogemos</h3>
+        <p>Coordinamos la recogida en tu casa u oficina en Barranquilla.</p>
+      </div>
+      <div class="paso">
+        <h3>Trabajamos</h3>
+        <p>Cada par a mano, con el tratamiento que pide su material.</p>
+      </div>
+      <div class="paso">
+        <h3>Entregamos</h3>
+        <p>Te los devolvemos listos, con fotos del antes y el después.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<section id="trabajos">
+  <div class="wrap">
+    <div class="ig-head">
+      <div>
+        <p class="tag">Trabajos recientes</p>
+        <h2>Antes y despues</h2>
+      </div>
+      <a class="ig-handle" href="https://www.instagram.com/pimpmyshoes.baq/" target="_blank" rel="noreferrer">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
+          <rect x="2" y="2" width="20" height="20" rx="5.5"/>
+          <circle cx="12" cy="12" r="4.2"/>
+          <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>
+        </svg>
+        @pimpmyshoes.baq
+      </a>
+    </div>
+
+    <div class="ig-grid" id="ig-grid" hidden></div>
+
+    <div class="ig-fallback" id="ig-fallback">
+      <div class="ig-skeleton" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+      <h3>Mira los <span class="grad">resultados</span></h3>
+      <p>Cada par que sale del taller queda documentado. El antes y el despues
+         de todos los trabajos esta en el Instagram.</p>
+      <a class="btn btn-main" href="https://www.instagram.com/pimpmyshoes.baq/" target="_blank" rel="noreferrer">Ver en Instagram</a>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="glow a" style="opacity:.18;top:-160px;right:-40px"></div>
+  <div class="wrap">
+    <h2>¿Tienes un par<br><span class="grad">para rescatar?</span></h2>
+    <p>Mándanos una foto por WhatsApp y te decimos qué se le puede hacer y cuánto cuesta.</p>
+    <div class="ctas">
+      <a class="btn btn-main" href="https://wa.me/573233376417?text=Hola%20Pimp%20My%20Shoes%2C%20les%20mando%20foto%20de%20mis%20tenis%20para%20cotizar" target="_blank" rel="noreferrer">Escribir por WhatsApp</a>
+      <a class="btn btn-ghost" href="https://www.instagram.com/pimpmyshoes.baq/" target="_blank" rel="noreferrer">@pimpmyshoes.baq</a>
+    </div>
+  </div>
+</section>
+
+<div class="wrap">
+  <footer>
+    <span>© 2026 Pimp My Shoes · Barranquilla, Colombia</span>
+    <span><a href="https://www.instagram.com/pimpmyshoes.baq/" target="_blank" rel="noreferrer">Instagram</a> · <a href="https://wa.me/573233376417" target="_blank" rel="noreferrer">WhatsApp</a></span>
+  </footer>
+</div>
+
+
+<script>
+/* ---------------------------------------------------------------
+   Feed de Instagram.
+
+   Instagram NO permite leer un perfil desde el navegador: su API pide
+   un token que caduca cada 60 dias y que no puede ir en codigo publico
+   (quien lo vea entra a la cuenta). Por eso hace falta un servicio
+   intermedio que guarde el token en su servidor y sirva el feed ya
+   procesado. Behold.so y LightWidget tienen plan gratuito.
+
+   PARA ACTIVARLO: pega aqui la URL del feed y listo.
+   Sin ella, la seccion muestra el bloque de respaldo, que tambien se
+   ve bien y lleva al perfil.
+--------------------------------------------------------------- */
+const FEED_URL = ""; // <- ej: "https://feeds.behold.so/TU_ID"
+
+const MAX_POSTS = 8;
+
+async function cargarFeed() {
+  if (!FEED_URL) return;                       // sin configurar: deja el respaldo
+  const grid = document.getElementById("ig-grid");
+  const fallback = document.getElementById("ig-fallback");
+
+  try {
+    const res = await fetch(FEED_URL);
+    if (!res.ok) throw new Error("feed " + res.status);
+    const posts = await res.json();
+    if (!Array.isArray(posts) || !posts.length) throw new Error("feed vacio");
+
+    grid.innerHTML = posts.slice(0, MAX_POSTS).map((p) => {
+      const img = p.thumbnailUrl || p.mediaUrl || p.media_url || "";
+      const url = p.permalink || "https://www.instagram.com/pimpmyshoes.baq/";
+      const cap = (p.caption || "").replace(/[<>]/g, "").slice(0, 120);
+      return `<a class="ig-item" href="${url}" target="_blank" rel="noreferrer">
+                <img src="${img}" alt="" loading="lazy" decoding="async">
+                ${cap ? `<span class="ig-cap">${cap}</span>` : ""}
+              </a>`;
+    }).join("");
+
+    grid.hidden = false;
+    fallback.hidden = true;
+  } catch (e) {
+    // Si el feed falla, el respaldo se queda: nunca un hueco vacio.
+    console.warn("No se pudo cargar el feed de Instagram:", e.message);
+  }
+}
+cargarFeed();
+</script>
+
+</body>
+</html>

@@ -77,7 +77,8 @@ export const content = {
           role: 'Negocio propio · operación y backend',
           desc: 'Negocio de restauración y personalización de calzado que llevo hace más de dos años. Además de la operación, construí la API que gestiona clientes y pedidos, con validación de entrada y capa de caché.',
           stack: ['Node.js', 'Express', 'Sequelize', 'MySQL', 'Redis', 'Joi'],
-          link: null
+          link: 'pimp/index.html',
+          linkLabel: 'Ver la landing'
         },
         {
           n: '04',
@@ -567,7 +568,8 @@ export const content = {
           role: 'My own business · operations and backend',
           desc: 'A shoe restoration and customisation business I have run for over two years. Beyond operations, I built the API that handles customers and orders, with input validation and a caching layer.',
           stack: ['Node.js', 'Express', 'Sequelize', 'MySQL', 'Redis', 'Joi'],
-          link: null
+          link: 'pimp/index.html',
+          linkLabel: 'View the landing'
         },
         {
           n: '04',

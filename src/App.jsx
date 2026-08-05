@@ -307,9 +307,16 @@ function Portfolio({ t }) {
         <div className="proj-grid">
           {t.portfolio.items.map((p, i) => {
             const isLink = !!p.link;
+            // Un enlace relativo (la landing de Pimp, servida desde public/)
+            // necesita el prefijo de base y abre en la misma pestana. Uno
+            // externo abre en pestana nueva.
+            const externo = isLink && /^https?:/.test(p.link);
+            const href = externo ? p.link : `${import.meta.env.BASE_URL}${p.link}`;
             const Tag = isLink ? 'a' : 'article';
             const linkProps = isLink
-              ? { href: p.link, target: '_blank', rel: 'noreferrer' }
+              ? externo
+                ? { href, target: '_blank', rel: 'noreferrer' }
+                : { href }
               : {};
             return (
               <Tag
