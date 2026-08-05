@@ -28,17 +28,34 @@ parte superior de la captura.
 
 | Archivo | Proyecto | Dimensiones | Peso máx | Formato |
 |---|---|---|---|---|
-| `planeat-coach.png` | PlanEat Coach (tarjeta grande) | **2000 × 1250** | 300 KB | WebP o PNG |
-| `claude-skills.png` | Automatizaciones Claude Code | **1200 × 750** | 150 KB | WebP o PNG |
-| `pimp-my-shoes.png` | Pimp My Shoes | **1200 × 750** | 150 KB | WebP o JPG |
-| `artist-finder.png` | Artist Finder API | **1200 × 750** | 150 KB | WebP o PNG |
-| `pokemon-fetch.png` | Pokémon Fetch | **1200 × 750** | 150 KB | WebP o PNG |
-| `simon-game.png` | Simon Game | **1200 × 750** | 150 KB | WebP o PNG |
+| `planeat-coach.png` | PlanEat Coach (tarjeta grande) | **2000 × 1250** | 250 KB | WebP o PNG |
+| `claude-skills.png` | Automatizaciones Claude Code | **1400 × 875** | 120 KB | WebP o PNG |
+| `pimp-my-shoes.png` | Pimp My Shoes | **1400 × 875** | 120 KB | WebP o JPG |
+| `artist-finder.png` | Artist Finder API | **1400 × 875** | 120 KB | WebP o PNG |
+| `pokemon-fetch.png` | Pokémon Fetch | **1400 × 875** | 120 KB | WebP o PNG |
+| `simon-game.png` | Simon Game | **1400 × 875** | 120 KB | WebP o PNG |
 
-**Por qué PlanEat es más grande:** su tarjeta ocupa el ancho completo de la
-rejilla (hasta 1168 px en escritorio). Las otras cinco van en columnas de
-~376 px, así que 1200 px de ancho ya es más del doble y se ve nítido en
-pantallas retina.
+### De dónde salen estos números
+
+Medidos sobre el sitio, no estimados. Ancho real del hueco de imagen:
+
+| Ventana | Tarjeta PlanEat | Tarjetas normales | Slideshow |
+|---|---|---|---|
+| 390 px | 332 | 332 | 288 |
+| 759 px | 701 | **701** (máximo) | 629 |
+| 760 px | 702 | 340 | 630 |
+| 1099 px | 985 | 482 | 913 |
+| 1100 px | 986 | 314 | 914 |
+| 1280 px o más | **1166** (máximo) | 374 | **1094** (máximo) |
+
+Lo importante: **las tarjetas normales son más anchas en tablet (701 px)
+que en escritorio (374 px)**, porque por debajo de 760 px la rejilla pasa a
+una sola columna. Por eso piden 1400 px y no 800: es el doble de 701, que
+es lo que necesita una pantalla retina en ese tamaño.
+
+PlanEat lleva 2000 px en vez de los 2332 que serían el doble exacto de
+1166: a 1,7x la diferencia no se percibe en una captura de pantalla y te
+ahorra un 40 % de peso.
 
 **Qué capturar en cada una:**
 
@@ -56,10 +73,10 @@ Van en el slideshow que ya existe, con ratio 16:10 y recorte anclado arriba.
 
 | Archivo | Producto | Dimensiones | Peso máx | Formato |
 |---|---|---|---|---|
-| `olimpica-juan-valdez-gourmet.png` | Café Juan Valdez Gourmet Set x4 | **1600 × 1000** | 200 KB | WebP o PNG |
-| `olimpica-juan-valdez-mujeres.png` | Cápsulas Juan Valdez Mujeres | **1600 × 1000** | 200 KB | WebP o PNG |
-| `olimpica-asus-tuf.png` | ASUS TUF Gaming A15 | **1600 × 1000** | 200 KB | WebP o PNG |
-| `olimpica-lavadora-mabe.png` | Lavadora Mabe 24kg | **1600 × 1000** | 200 KB | WebP o PNG |
+| `olimpica-juan-valdez-gourmet.png` | Café Juan Valdez Gourmet Set x4 | **1800 × 1125** | 150 KB | WebP o PNG |
+| `olimpica-juan-valdez-mujeres.png` | Cápsulas Juan Valdez Mujeres | **1800 × 1125** | 150 KB | WebP o PNG |
+| `olimpica-asus-tuf.png` | ASUS TUF Gaming A15 | **1800 × 1125** | 150 KB | WebP o PNG |
+| `olimpica-lavadora-mabe.png` | Lavadora Mabe 24kg | **1800 × 1125** | 150 KB | WebP o PNG |
 
 **Cómo capturarlas bien:**
 
@@ -68,7 +85,7 @@ Van en el slideshow que ya existe, con ratio 16:10 y recorte anclado arriba.
    así el sitio se ve en su layout de escritorio, no estirado).
 2. Baja hasta la sección de descripción, que es la parte que maquetaste tú.
 3. Captura con `cmd + shift + 4` y arrastra sobre la zona de la descripción.
-4. Recorta a 1600 × 1000. Lo que quede arriba es lo que se verá.
+4. Recorta a 1800 × 1125. Lo que quede arriba es lo que se verá.
 
 ## 3. Imagen para redes sociales · `public/og.png`
 
@@ -77,7 +94,7 @@ Sin ella, el link sale como texto plano.
 
 | Archivo | Dimensiones | Peso máx | Formato |
 |---|---|---|---|
-| `og.png` | **1200 × 630** (exacto) | 300 KB | PNG o JPG |
+| `og.png` | **1200 × 630** (exacto) | 250 KB | PNG o JPG |
 
 Estas medidas no son negociables: es el estándar de Open Graph y si no
 coincide, las plataformas la recortan mal. Si quieres te la genero yo con
@@ -87,7 +104,7 @@ tu nombre, el cargo y el logo sobre el verde de marca; dime y la hago.
 
 | Archivo | Dimensiones | Peso máx | Formato |
 |---|---|---|---|
-| `retrato.jpg` | **800 × 800** (cuadrada) | 120 KB | JPG o WebP |
+| `retrato.jpg` | **800 × 800** (cuadrada) | 100 KB | JPG o WebP |
 
 Puedes reusar la misma del CV. Recórtala cuadrada, centrada en la cara,
 con algo de aire arriba.
@@ -119,4 +136,12 @@ contenido, no por la extensión, así que funciona igual.
 ## Lo que ya no necesitas mandarme
 
 - **Favicon**: generado desde tu logo, ya está en `public/favicon-32.png` y `public/favicon-180.png`.
-- **Logo**: optimizado y vectorizado. Pasó de 165 KB a 5,8 KB.
+- **Logo**: optimizado. Pasó de 165 KB a 6,5 KB por versión (clara y oscura).
+
+## Presupuesto total
+
+Sumando todo: **~1,4 MB**. Parece mucho, pero todas las imágenes cargan de
+forma diferida (`loading="lazy"`): solo se descargan cuando el visitante
+llega a esa sección. El hero no lleva ninguna imagen, que es lo que hace
+que la primera pantalla aparezca casi al instante. Eso importa sobre todo
+con tráfico de anuncios, donde la gente abandona si tarda.
