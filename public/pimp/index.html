@@ -110,42 +110,6 @@ footer a{color:var(--cian);text-decoration:none}
 footer a:hover{text-decoration:underline}
 
 
-/* ---------- INSTAGRAM ---------- */
-.ig-head{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;flex-wrap:wrap;margin-bottom:34px}
-.ig-handle{display:inline-flex;align-items:center;gap:9px;font-size:13px;font-weight:600;
-  letter-spacing:.06em;color:var(--cian);text-decoration:none;white-space:nowrap}
-.ig-handle:hover{text-decoration:underline}
-.ig-handle svg{width:17px;height:17px;flex:none}
-
-.ig-grid{display:grid;gap:12px;grid-template-columns:repeat(2,1fr)}
-@media(min-width:640px){.ig-grid{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:1000px){.ig-grid{grid-template-columns:repeat(4,1fr);gap:14px}}
-
-.ig-item{position:relative;display:block;aspect-ratio:1;overflow:hidden;border-radius:14px;
-  background:var(--surface-2);border:1px solid var(--line);text-decoration:none;
-  transition:transform .4s var(--ease),border-color .4s var(--ease)}
-.ig-item:hover{transform:translateY(-5px);border-color:var(--violeta)}
-.ig-item img{width:100%;height:100%;object-fit:cover;display:block;
-  transition:transform .6s var(--ease),filter .4s var(--ease)}
-.ig-item:hover img{transform:scale(1.06)}
-.ig-cap{position:absolute;inset:auto 0 0 0;padding:34px 14px 12px;
-  background:linear-gradient(180deg,transparent,rgba(13,11,20,.92));
-  font-size:11.5px;line-height:1.4;color:#F7F5FF;
-  display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;
-  opacity:0;transition:opacity .35s var(--ease)}
-.ig-item:hover .ig-cap{opacity:1}
-
-/* Respaldo cuando aun no hay feed conectado */
-.ig-fallback{position:relative;padding:56px 28px;text-align:center;border-radius:18px;
-  background:var(--surface);border:1px solid var(--line);overflow:hidden}
-.ig-fallback h3{font-size:clamp(26px,4.6vw,40px);margin-bottom:12px}
-.ig-fallback p{max-width:42ch;margin:0 auto 26px;color:var(--ink-soft);font-size:15px}
-.ig-skeleton{display:grid;gap:10px;grid-template-columns:repeat(4,1fr);max-width:420px;margin:0 auto 30px;opacity:.5}
-.ig-skeleton i{display:block;aspect-ratio:1;border-radius:10px;background:var(--grad);opacity:.22}
-.ig-skeleton i:nth-child(2){opacity:.34}
-.ig-skeleton i:nth-child(3){opacity:.28}
-.ig-skeleton i:nth-child(4){opacity:.4}
-
 @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
@@ -239,35 +203,6 @@ footer a:hover{text-decoration:underline}
 </section>
 
 
-<section id="trabajos">
-  <div class="wrap">
-    <div class="ig-head">
-      <div>
-        <p class="tag">Trabajos recientes</p>
-        <h2>Antes y despues</h2>
-      </div>
-      <a class="ig-handle" href="https://www.instagram.com/pimpmyshoes.baq/" target="_blank" rel="noreferrer">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true">
-          <rect x="2" y="2" width="20" height="20" rx="5.5"/>
-          <circle cx="12" cy="12" r="4.2"/>
-          <circle cx="17.6" cy="6.4" r="1.1" fill="currentColor" stroke="none"/>
-        </svg>
-        @pimpmyshoes.baq
-      </a>
-    </div>
-
-    <div class="ig-grid" id="ig-grid" hidden></div>
-
-    <div class="ig-fallback" id="ig-fallback">
-      <div class="ig-skeleton" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
-      <h3>Mira los <span class="grad">resultados</span></h3>
-      <p>Cada par que sale del taller queda documentado. El antes y el despues
-         de todos los trabajos esta en el Instagram.</p>
-      <a class="btn btn-main" href="https://www.instagram.com/pimpmyshoes.baq/" target="_blank" rel="noreferrer">Ver en Instagram</a>
-    </div>
-  </div>
-</section>
-
 <section class="final">
   <div class="glow a" style="opacity:.18;top:-160px;right:-40px"></div>
   <div class="wrap">
@@ -287,55 +222,6 @@ footer a:hover{text-decoration:underline}
   </footer>
 </div>
 
-
-<script>
-/* ---------------------------------------------------------------
-   Feed de Instagram.
-
-   Instagram NO permite leer un perfil desde el navegador: su API pide
-   un token que caduca cada 60 dias y que no puede ir en codigo publico
-   (quien lo vea entra a la cuenta). Por eso hace falta un servicio
-   intermedio que guarde el token en su servidor y sirva el feed ya
-   procesado. Behold.so y LightWidget tienen plan gratuito.
-
-   PARA ACTIVARLO: pega aqui la URL del feed y listo.
-   Sin ella, la seccion muestra el bloque de respaldo, que tambien se
-   ve bien y lleva al perfil.
---------------------------------------------------------------- */
-const FEED_URL = ""; // <- ej: "https://feeds.behold.so/TU_ID"
-
-const MAX_POSTS = 8;
-
-async function cargarFeed() {
-  if (!FEED_URL) return;                       // sin configurar: deja el respaldo
-  const grid = document.getElementById("ig-grid");
-  const fallback = document.getElementById("ig-fallback");
-
-  try {
-    const res = await fetch(FEED_URL);
-    if (!res.ok) throw new Error("feed " + res.status);
-    const posts = await res.json();
-    if (!Array.isArray(posts) || !posts.length) throw new Error("feed vacio");
-
-    grid.innerHTML = posts.slice(0, MAX_POSTS).map((p) => {
-      const img = p.thumbnailUrl || p.mediaUrl || p.media_url || "";
-      const url = p.permalink || "https://www.instagram.com/pimpmyshoes.baq/";
-      const cap = (p.caption || "").replace(/[<>]/g, "").slice(0, 120);
-      return `<a class="ig-item" href="${url}" target="_blank" rel="noreferrer">
-                <img src="${img}" alt="" loading="lazy" decoding="async">
-                ${cap ? `<span class="ig-cap">${cap}</span>` : ""}
-              </a>`;
-    }).join("");
-
-    grid.hidden = false;
-    fallback.hidden = true;
-  } catch (e) {
-    // Si el feed falla, el respaldo se queda: nunca un hueco vacio.
-    console.warn("No se pudo cargar el feed de Instagram:", e.message);
-  }
-}
-cargarFeed();
-</script>
 
 </body>
 </html>

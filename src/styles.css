@@ -442,9 +442,9 @@ em { font-style: normal; }
    ===================================================== */
 .hero {
   position: relative;
-  padding: 180px 0 160px;
+  padding: 132px 0 72px;
   overflow: hidden;
-  min-height: 100vh;
+  min-height: auto;
 }
 .hero-grid {
   display: grid;
@@ -453,8 +453,24 @@ em { font-style: normal; }
   align-items: end;
 }
 @media (min-width: 980px) {
-  .hero { padding: 200px 0 180px; }
-  .hero-grid { grid-template-columns: 1.5fr 1fr; gap: 80px; }
+  /* 220px abajo: el indicador de scroll mide ~170px y va en absolute,
+     asi que hay que reservarle sitio o el bloque de cifras lo pisa. */
+  .hero { padding: 152px 0 220px; }
+  /* Una sola columna a proposito. Con `1.5fr 1fr` el ancho minimo del
+     contenido mandaba sobre la fraccion: la palabra mas larga del titular
+     fijaba el ancho de columna, que pasaba de 712px en ingles a 1102px en
+     espanol, y "automatizaciones" (1149px a 132px) desbordaba la rejilla.
+     A ancho completo el titular siempre cabe y las cifras van debajo. */
+  .hero-grid { grid-template-columns: 1fr; gap: 48px; }
+  .hero-meta {
+    grid-auto-flow: column;
+    grid-auto-columns: max-content;
+    gap: 56px;
+    border-left: 0;
+    border-top: 1px solid var(--line);
+    padding-left: 0;
+    padding-top: 28px;
+  }
 }
 
 .hero-eyebrow {
@@ -469,10 +485,14 @@ em { font-style: normal; }
 }
 
 .hero-title {
-  font-size: clamp(48px, 9vw, 132px);
-  line-height: 0.96;
+  /* 112px y no 132: a 132 la palabra mas larga del titular en espanol
+     mide 1149px y el contenedor util son 1168px. Sin margen. */
+  font-size: clamp(40px, 7.6vw, 112px);
+  line-height: 0.98;
   letter-spacing: -0.035em;
   font-weight: var(--w-display);
+  min-width: 0;              /* permite encogerse dentro de la rejilla */
+  overflow-wrap: break-word; /* red de seguridad si algun dia el copy crece */
 }
 .hero-title .word {
   display: inline-block;
@@ -541,17 +561,27 @@ em { font-style: normal; }
   margin-top: 8px;
 }
 
-/* Scroll cue con personalidad */
+/* Scroll cue con personalidad.
+   Va en position:absolute, asi que NO reserva espacio: en movil el bloque
+   de cifras le pasaba por encima. Se oculta por debajo de 980px, donde
+   ademas sobra (en pantalla pequena se ve que hay mas contenido).
+   El `display` vive solo en la media query: si se dejara `display:flex`
+   en la regla base, ganaria por orden de cascada a cualquier
+   `display:none` declarado antes. */
 .hero-scroll-cue {
+  display: none;
   position: absolute;
   bottom: 36px; left: 50%;
   transform: translateX(-50%);
-  display: flex; flex-direction: column; align-items: center; gap: 14px;
+  flex-direction: column; align-items: center; gap: 14px;
   color: var(--ink-soft);
   opacity: 0;
   animation: fadeUp 1.2s var(--ease) forwards;
   animation-delay: 1.4s;
   z-index: 5;
+}
+@media (min-width: 980px) {
+  .hero-scroll-cue { display: flex; }
 }
 .hero-scroll-clover {
   color: var(--rose);

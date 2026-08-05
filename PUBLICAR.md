@@ -9,7 +9,7 @@ requieren tu contraseña de GitHub.
 ## Abrirlo en tu computador (esto es lo primero)
 
 ```bash
-cd ~/Desktop/andrea-portfolio
+cd ~/Dev/andrea-portfolio
 npm run dev
 ```
 
@@ -35,7 +35,7 @@ Los comandos de abajo **guardan el sitio viejo en una rama** llamada
 ### Paso 1: conectar con tu repo
 
 ```bash
-cd ~/Desktop/andrea-portfolio
+cd ~/Dev/andrea-portfolio
 git remote add origin https://github.com/bohorquezandrea/portfolio.git
 git fetch origin
 ```
@@ -88,7 +88,7 @@ corriendo. Tarda 1 o 2 minutos.
 Cada vez que quieras publicar un cambio:
 
 ```bash
-cd ~/Desktop/andrea-portfolio
+cd ~/Dev/andrea-portfolio
 git add -A
 git commit -m "lo que cambiaste"
 git push
