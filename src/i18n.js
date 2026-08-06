@@ -47,7 +47,7 @@ export const content = {
         {
           n: '01',
           title: 'PlanEat',
-          img: 'planeat-coach.png',
+          img: 'planeat-coach.webp',
           titleEm: 'Coach',
           year: '2026 · Trabajo Fin de Máster',
           role: 'Full-Stack · diseño, backend, app y tests',
@@ -59,7 +59,7 @@ export const content = {
         {
           n: '02',
           title: 'Automatizaciones',
-          img: 'claude-skills.png',
+          img: 'claude-skills.webp',
           titleEm: 'con Claude Code',
           year: '2026 · Tucan',
           role: 'AI Product Engineer',
@@ -71,7 +71,7 @@ export const content = {
         {
           n: '03',
           title: 'Pimp',
-          img: 'pimp-my-shoes.png',
+          img: 'pimp-my-shoes.webp',
           titleEm: 'My Shoes',
           year: '2023 → presente',
           role: 'Negocio propio · operación y backend',
@@ -83,7 +83,7 @@ export const content = {
         {
           n: '04',
           title: 'Artist Finder',
-          img: 'artist-finder.png',
+          img: 'artist-finder.webp',
           titleEm: 'API',
           year: '2025',
           role: 'Backend · Python',
@@ -95,7 +95,7 @@ export const content = {
         {
           n: '05',
           title: 'Pokémon',
-          img: 'pokemon-fetch.png',
+          img: 'pokemon-fetch.webp',
           titleEm: 'Fetch',
           year: '2025',
           role: 'Front-End · JavaScript',
@@ -107,7 +107,7 @@ export const content = {
         {
           n: '06',
           title: 'Simon',
-          img: 'simon-game.png',
+          img: 'simon-game.webp',
           titleEm: 'Game',
           year: '2024',
           role: 'Front-End · JavaScript',
@@ -392,25 +392,25 @@ export const content = {
           name: 'Café Juan Valdez Gourmet Set x4',
           note: 'Maqueta diseñada de cero. Caso destacado',
           url: 'https://www.olimpica.com/cafe-juan-valdez-gourmet-set-x4paq-28/p#description',
-          file: 'olimpica-juan-valdez-gourmet.png'
+          file: 'olimpica-juan-valdez-gourmet.webp'
         },
         {
           name: 'Cápsulas Café Juan Valdez Mujeres',
           note: 'Maqueta y publicación · ver descripción',
           url: 'https://www.olimpica.com/capsulas-cafe-juan-valdez-mujeres-44-8g/p#description',
-          file: 'olimpica-juan-valdez-mujeres.png'
+          file: 'olimpica-juan-valdez-mujeres.webp'
         },
         {
           name: 'ASUS TUF Gaming A15 · Ryzen 7',
           note: 'Ficha de producto con specs y galería',
           url: 'https://www.olimpica.com/asus-tuf-gaming-a15-fa506ncg-hn193w-amd-ryzen-7-8gb-512gb-rtx3050/p#description',
-          file: 'olimpica-asus-tuf.png'
+          file: 'olimpica-asus-tuf.webp'
         },
         {
           name: 'Lavadora automática Mabe 24kg',
           note: 'Ficha técnica con tabs de descripción',
           url: 'https://www.olimpica.com/lavadora-automatica-agitador-24kg-diamond-gray-mabe---lmc74215wdab0/p#description',
-          file: 'olimpica-lavadora-mabe.png'
+          file: 'olimpica-lavadora-mabe.webp'
         }
       ]
     },
@@ -540,7 +540,7 @@ export const content = {
         {
           n: '01',
           title: 'PlanEat',
-          img: 'planeat-coach.png',
+          img: 'planeat-coach.webp',
           titleEm: 'Coach',
           year: "2026 · Master's thesis",
           role: 'Full-Stack · design, backend, app and tests',
@@ -552,7 +552,7 @@ export const content = {
         {
           n: '02',
           title: 'Automation',
-          img: 'claude-skills.png',
+          img: 'claude-skills.webp',
           titleEm: 'with Claude Code',
           year: '2026 · Tucan',
           role: 'AI Product Engineer',
@@ -564,7 +564,7 @@ export const content = {
         {
           n: '03',
           title: 'Pimp',
-          img: 'pimp-my-shoes.png',
+          img: 'pimp-my-shoes.webp',
           titleEm: 'My Shoes',
           year: '2023 → present',
           role: 'My own business · operations and backend',
@@ -576,7 +576,7 @@ export const content = {
         {
           n: '04',
           title: 'Artist Finder',
-          img: 'artist-finder.png',
+          img: 'artist-finder.webp',
           titleEm: 'API',
           year: '2025',
           role: 'Backend · Python',
@@ -588,7 +588,7 @@ export const content = {
         {
           n: '05',
           title: 'Pokémon',
-          img: 'pokemon-fetch.png',
+          img: 'pokemon-fetch.webp',
           titleEm: 'Fetch',
           year: '2025',
           role: 'Front-End · JavaScript',
@@ -600,7 +600,7 @@ export const content = {
         {
           n: '06',
           title: 'Simon',
-          img: 'simon-game.png',
+          img: 'simon-game.webp',
           titleEm: 'Game',
           year: '2024',
           role: 'Front-End · JavaScript',
@@ -885,25 +885,25 @@ export const content = {
           name: 'Café Juan Valdez Gourmet Set x4',
           note: 'Layout designed from scratch. Featured case',
           url: 'https://www.olimpica.com/cafe-juan-valdez-gourmet-set-x4paq-28/p#description',
-          file: 'olimpica-juan-valdez-gourmet.png'
+          file: 'olimpica-juan-valdez-gourmet.webp'
         },
         {
           name: 'Café Juan Valdez Mujeres capsules',
           note: 'Layout and publishing · view description',
           url: 'https://www.olimpica.com/capsulas-cafe-juan-valdez-mujeres-44-8g/p#description',
-          file: 'olimpica-juan-valdez-mujeres.png'
+          file: 'olimpica-juan-valdez-mujeres.webp'
         },
         {
           name: 'ASUS TUF Gaming A15 · Ryzen 7',
           note: 'Product page with specs and gallery',
           url: 'https://www.olimpica.com/asus-tuf-gaming-a15-fa506ncg-hn193w-amd-ryzen-7-8gb-512gb-rtx3050/p#description',
-          file: 'olimpica-asus-tuf.png'
+          file: 'olimpica-asus-tuf.webp'
         },
         {
           name: 'Mabe 24kg automatic washer',
           note: 'Tech sheet with description tabs',
           url: 'https://www.olimpica.com/lavadora-automatica-agitador-24kg-diamond-gray-mabe---lmc74215wdab0/p#description',
-          file: 'olimpica-lavadora-mabe.png'
+          file: 'olimpica-lavadora-mabe.webp'
         }
       ]
     },
