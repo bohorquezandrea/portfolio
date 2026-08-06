@@ -87,19 +87,6 @@ Van en el slideshow que ya existe, con ratio 16:10 y recorte anclado arriba.
 3. Captura con `cmd + shift + 4` y arrastra sobre la zona de la descripción.
 4. Recorta a 1800 × 1125. Lo que quede arriba es lo que se verá.
 
-## 3. Imagen para redes sociales · `public/og.png`
-
-Es la que aparece cuando compartas el link por WhatsApp, LinkedIn o Slack.
-Sin ella, el link sale como texto plano.
-
-| Archivo | Dimensiones | Peso máx | Formato |
-|---|---|---|---|
-| `og.png` | **1200 × 630** (exacto) | 250 KB | PNG o JPG |
-
-Estas medidas no son negociables: es el estándar de Open Graph y si no
-coincide, las plataformas la recortan mal. Si quieres te la genero yo con
-tu nombre, el cargo y el logo sobre el verde de marca; dime y la hago.
-
 
 ---
 
@@ -129,6 +116,8 @@ contenido, no por la extensión, así que funciona igual.
 
 - **Favicon**: generado desde tu logo, ya está en `public/favicon-32.png` y `public/favicon-180.png`.
 - **Logo**: optimizado. Pasó de 165 KB a 6,5 KB por versión (clara y oscura).
+- **`og.png`**: generada con tu paleta, tu logo y tu titular. 1200 × 630,
+  85 KB. Ya está en `public/og.png` con sus meta tags.
 
 ## Presupuesto total
 
