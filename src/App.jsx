@@ -405,10 +405,8 @@ function Portfolio({ t }) {
                 {...linkProps}
                 className={`proj reveal reveal-delay-${(i % 3) + 1}${i === 0 ? ' is-featured' : ''}${isLink ? ' is-link' : ''}`}
               >
-                {/* Dos formatos de captura, segun lo que pida el proyecto:
-                    `shots` para pantallas verticales de movil, que se ven de
-                    una en una; `img` para una captura unica apaisada. */}
-                {p.shots && <Pantallas shots={p.shots} etiqueta={p.shotsLabel} />}
+                {/* Captura unica apaisada. Las pantallas verticales (`shots`)
+                    van despues del texto, al final de la tarjeta. */}
                 {!p.shots && p.img && (
                   <div className="proj-shot">
                     <img
@@ -438,6 +436,7 @@ function Portfolio({ t }) {
                 </ul>
                 {isLink && <span className="proj-link">{p.linkLabel} ↗</span>}
                 {!isLink && p.note && <span className="proj-note">{p.note}</span>}
+                {p.shots && <Pantallas shots={p.shots} etiqueta={p.shotsLabel} />}
               </Tag>
             );
           })}

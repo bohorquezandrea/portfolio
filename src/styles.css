@@ -1850,7 +1850,8 @@ section { padding: 110px 0; position: relative; }
   grid-template-columns: minmax(0, 1fr);
   gap: 26px;
   justify-items: center;
-  margin: 4px 0 34px;
+  /* Va debajo del texto de la tarjeta, asi que separa por arriba */
+  margin: 34px 0 4px;
 }
 
 .pe-visor {
@@ -1960,7 +1961,7 @@ section { padding: 110px 0; position: relative; }
     align-items: center;
     gap: 44px;
     justify-items: start;
-    margin: 8px 0 38px;
+    margin: 38px 0 8px;
   }
   .pe-visor { width: 252px; }
   .pe-info { text-align: left; max-width: 520px; }
