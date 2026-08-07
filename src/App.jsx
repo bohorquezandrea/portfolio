@@ -337,17 +337,23 @@ function Portfolio({ t }) {
                     captura unica apaisada. Meter cinco pantallas verticales
                     dentro de un marco 8:5 las dejaba diminutas. */}
                 {p.shots && (
-                  <div className="proj-fila">
-                    {p.shots.map((s, k) => (
-                      <div className="proj-tel" key={k}>
-                        <img
-                          src={`${import.meta.env.BASE_URL}img/proyectos/${s}`}
-                          alt=""
-                          loading="lazy"
-                          decoding="async"
-                        />
-                      </div>
-                    ))}
+                  <div className="pe-carrusel">
+                    {/* La cinta lleva las pantallas DOS veces: la animacion
+                        la desplaza justo un 50%, asi que al terminar el ciclo
+                        la segunda copia esta donde empezo la primera y el
+                        salto es invisible. */}
+                    <div className="pe-cinta">
+                      {[...p.shots, ...p.shots].map((s, k) => (
+                        <div className="pe-tel" key={k} aria-hidden={k >= p.shots.length}>
+                          <img
+                            src={`${import.meta.env.BASE_URL}img/proyectos/${s}`}
+                            alt=""
+                            loading="lazy"
+                            decoding="async"
+                          />
+                        </div>
+                      ))}
+                    </div>
                   </div>
                 )}
                 {!p.shots && p.img && (

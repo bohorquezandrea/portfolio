@@ -48,11 +48,8 @@ export const content = {
           n: '01',
           title: 'PlanEat',
           shots: [
-            'planeat/1-bienvenida.webp',
-            'planeat/2-inicio.webp',
-            'planeat/3-nutricion.webp',
-            'planeat/4-entrenos.webp',
-            'planeat/5-atletas.webp'
+            'planeat/01.webp', 'planeat/02.webp', 'planeat/03.webp', 'planeat/04.webp',
+            'planeat/05.webp', 'planeat/06.webp', 'planeat/07.webp', 'planeat/08.webp'
           ],
           titleEm: 'Coach',
           year: '2026 · Trabajo Fin de Máster',
@@ -547,11 +544,8 @@ export const content = {
           n: '01',
           title: 'PlanEat',
           shots: [
-            'planeat/1-bienvenida.webp',
-            'planeat/2-inicio.webp',
-            'planeat/3-nutricion.webp',
-            'planeat/4-entrenos.webp',
-            'planeat/5-atletas.webp'
+            'planeat/01.webp', 'planeat/02.webp', 'planeat/03.webp', 'planeat/04.webp',
+            'planeat/05.webp', 'planeat/06.webp', 'planeat/07.webp', 'planeat/08.webp'
           ],
           titleEm: 'Coach',
           year: "2026 · Master's thesis",
