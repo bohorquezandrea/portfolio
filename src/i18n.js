@@ -47,7 +47,13 @@ export const content = {
         {
           n: '01',
           title: 'PlanEat',
-          img: 'planeat-coach.webp',
+          shots: [
+            'planeat/1-bienvenida.webp',
+            'planeat/2-inicio.webp',
+            'planeat/3-nutricion.webp',
+            'planeat/4-entrenos.webp',
+            'planeat/5-atletas.webp'
+          ],
           titleEm: 'Coach',
           year: '2026 · Trabajo Fin de Máster',
           role: 'Full-Stack · diseño, backend, app y tests',
@@ -540,7 +546,13 @@ export const content = {
         {
           n: '01',
           title: 'PlanEat',
-          img: 'planeat-coach.webp',
+          shots: [
+            'planeat/1-bienvenida.webp',
+            'planeat/2-inicio.webp',
+            'planeat/3-nutricion.webp',
+            'planeat/4-entrenos.webp',
+            'planeat/5-atletas.webp'
+          ],
           titleEm: 'Coach',
           year: "2026 · Master's thesis",
           role: 'Full-Stack · design, backend, app and tests',

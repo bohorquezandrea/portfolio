@@ -1,6 +1,6 @@
 # Andrea Bohorquez · Portfolio
 
-Landing + portfolio personal. React + Vite, sin Tailwind ni librerías de UI. Paleta inspirada en *Sweet Alhambra* (Van Cleef &amp; Arpels). Modo claro / oscuro adaptable.
+Landing + portfolio personal. React + Vite, sin Tailwind ni librerías de UI. Paleta alto croma: verde botella, lavanda y durazno. Modo claro / oscuro adaptable. Ver BRAND.md.
 
 ## Cómo correrlo en local
 

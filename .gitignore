@@ -1,5 +1,30 @@
+# Dependencias y compilados
 node_modules
 dist
-.DS_Store
-*.local
 .vite
+*.tsbuildinfo
+
+# Credenciales y entorno. NUNCA deben subirse.
+.env
+.env.*
+!.env.example
+*.pem
+*.key
+
+# Sistema
+.DS_Store
+Thumbs.db
+*.local
+
+# Editores
+.idea/
+.vscode/
+*.swp
+*~
+
+# Registros y temporales
+*.log
+npm-debug.log*
+.cache/
+tmp/
+*.pdf

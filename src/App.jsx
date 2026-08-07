@@ -331,9 +331,26 @@ function Portfolio({ t }) {
                 {...linkProps}
                 className={`proj reveal reveal-delay-${(i % 3) + 1}${i === 0 ? ' is-featured' : ''}${isLink ? ' is-link' : ''}`}
               >
-                {/* La imagen es opcional: si el archivo no existe todavia,
-                    onError la retira y la tarjeta queda igual de valida. */}
-                {p.img && (
+                {/* Dos formatos de captura, segun lo que pida el proyecto:
+                    `shots` para pantallas verticales de movil, que se muestran
+                    en fila y se recortan por CSS segun el ancho; `img` para una
+                    captura unica apaisada. Meter cinco pantallas verticales
+                    dentro de un marco 8:5 las dejaba diminutas. */}
+                {p.shots && (
+                  <div className="proj-fila">
+                    {p.shots.map((s, k) => (
+                      <div className="proj-tel" key={k}>
+                        <img
+                          src={`${import.meta.env.BASE_URL}img/proyectos/${s}`}
+                          alt=""
+                          loading="lazy"
+                          decoding="async"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                )}
+                {!p.shots && p.img && (
                   <div className="proj-shot">
                     <img
                       src={`${import.meta.env.BASE_URL}img/proyectos/${p.img}`}
