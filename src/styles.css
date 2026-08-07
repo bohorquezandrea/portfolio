@@ -1657,15 +1657,10 @@ section { padding: 110px 0; position: relative; }
   background: var(--inv-bg);
   border-color: var(--inv-bg);
   color: var(--inv-fg);
-  /* El carrusel sangra hasta el borde de la tarjeta con margenes negativos.
-     Se definen aqui como variables para que padding y margen no se puedan
-     desincronizar al cambiar de breakpoint. */
-  --pe-pad-y: 44px;
-  --pe-pad-x: 36px;
-  padding: var(--pe-pad-y) var(--pe-pad-x);
+  padding: 44px 36px;
 }
 @media (max-width: 759px) {
-  .proj.is-featured { --pe-pad-y: 32px; --pe-pad-x: 24px; }
+  .proj.is-featured { padding: 32px 24px; }
 }
 .proj.is-featured .proj-num,
 .proj.is-featured .proj-title { color: var(--inv-fg); }
@@ -1842,77 +1837,155 @@ section { padding: 110px 0; position: relative; }
 
 
 /* =====================================================
-   CARRUSEL DE PANTALLAS (PlanEat)
-   Cinta continua en vez de una fila estatica: muestra 4 o 5 telefonos a
-   la vez y se desplaza sola. La cinta lleva las pantallas duplicadas y
-   la animacion avanza exactamente un 50%, asi que el bucle no salta.
+   PANTALLAS DE LA APP (PlanEat)
+   Una captura a la vez, completa. Sin cinta, sin recortes en los bordes
+   y sin sombras: el telefono se apoya en la tarjeta con un borde fino.
+   En escritorio va al lado del texto que explica cada pantalla.
    ===================================================== */
-.pe-carrusel {
-  position: relative;
-  min-width: 0;
-  margin: calc(-1 * var(--pe-pad-y)) calc(-1 * var(--pe-pad-x)) 32px;
-  padding: 46px 0 40px;
-  overflow: hidden;
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-  background:
-    radial-gradient(90% 120% at 50% -10%, var(--bg-blush) 0%, transparent 65%),
-    linear-gradient(180deg, var(--bg-blush-soft), var(--bg-paper));
-  /* Las pantallas se desvanecen en los bordes en vez de cortarse en seco */
-  -webkit-mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
-          mask-image: linear-gradient(90deg, transparent, #000 7%, #000 93%, transparent);
+.pe {
+  display: grid;
+  /* Columna explicita: dentro de una columna `auto` un ancho en % es
+     circular (la columna la define el contenido y el contenido la columna)
+     y el visor colapsaba a 2px. */
+  grid-template-columns: minmax(0, 1fr);
+  gap: 26px;
+  justify-items: center;
+  margin: 4px 0 34px;
 }
 
-.pe-cinta {
+.pe-visor {
+  position: relative;
+  width: min(100%, 232px);
+  /* Fija el alto desde el ancho, asi el fundido no salta al cambiar */
+  aspect-ratio: 460 / 997;
+  border-radius: 20px;
+  overflow: hidden;
+  background: var(--inv-fg);
+  border: 1px solid var(--inv-line);
+}
+
+.pe-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.55s var(--ease);
+}
+.pe-img[data-activa] { opacity: 1; }
+
+.pe-info { width: 100%; max-width: 460px; text-align: center; }
+
+.pe-etiqueta {
   display: flex;
-  gap: 22px;
-  width: max-content;
-  animation: peDesliza 46s linear infinite;
-}
-.pe-carrusel:hover .pe-cinta { animation-play-state: paused; }
-
-@keyframes peDesliza {
-  from { transform: translate3d(0, 0, 0); }
-  to   { transform: translate3d(-50%, 0, 0); }
-}
-
-.pe-tel {
-  position: relative;
-  flex: none;
-  width: 196px;
-  border-radius: 18px;
-  overflow: hidden;
-  background: var(--bg-paper);
-  /* Sombra en tres capas: contacto, cuerpo y halo. Una sola sombra
-     grande se ve plana; tres dan profundidad real. */
-  box-shadow:
-    0 1px 2px rgba(4, 12, 9, 0.30),
-    0 10px 22px -8px rgba(4, 12, 9, 0.45),
-    0 30px 55px -22px rgba(4, 12, 9, 0.55);
-  border: 1px solid rgba(245, 238, 224, 0.10);
-  transition: transform 0.6s var(--ease), box-shadow 0.6s var(--ease);
-}
-.pe-tel img { width: 100%; height: auto; display: block; }
-
-/* Alternancia sutil de altura: da ritmo sin descolocar la fila */
-.pe-tel:nth-child(even) { transform: translateY(14px); }
-
-.pe-carrusel:hover .pe-tel {
-  box-shadow:
-    0 1px 2px rgba(4, 12, 9, 0.30),
-    0 14px 30px -8px rgba(4, 12, 9, 0.50),
-    0 40px 70px -22px rgba(201, 184, 245, 0.28);
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--inv-accent);
+  margin-bottom: 10px;
 }
 
-@media (min-width: 760px)  { .pe-tel { width: 214px; } .pe-cinta { gap: 26px; } }
-@media (min-width: 1100px) { .pe-tel { width: 232px; } .pe-cinta { gap: 30px; } }
-@media (max-width: 759px) {
-  .pe-carrusel { margin-bottom: 24px; padding: 34px 0 30px; }
-  .pe-tel { width: 158px; border-radius: 14px; }
-  .pe-cinta { gap: 16px; }
+.pe-contador {
+  font-variant-numeric: tabular-nums;
+  color: var(--inv-fg-soft);
 }
 
-/* Sin movimiento: la cinta se queda quieta y se ve igual de bien */
+.pe-nombre {
+  font-size: 1.15rem;
+  font-weight: var(--w-heading);
+  color: var(--inv-fg);
+  margin: 0 0 6px;
+}
+
+.pe-desc {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--inv-fg-soft);
+  margin: 0;
+  /* Reserva el alto de dos lineas para que los puntos no bailen */
+  min-height: 2.9em;
+}
+
+.pe-puntos {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px;
+  margin-top: 14px;
+}
+
+/* El boton mide 34px para que se pueda tocar con el dedo; el punto que
+   se ve es el ::after, mucho mas pequeno. */
+.pe-punto {
+  width: 34px;
+  height: 34px;
+  padding: 0;
+  border: 0;
+  background: none;
+  cursor: pointer;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+}
+.pe-punto::after {
+  content: '';
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--inv-fg);
+  /* 0.28 daba 1.7:1 sobre la tarjeta lavanda. Los puntos son controles,
+     asi que les aplica el minimo de 3:1 de contraste no textual. */
+  opacity: 0.55;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.pe-punto:hover::after { opacity: 0.8; }
+.pe-punto[data-activa]::after {
+  opacity: 1;
+  transform: scale(1.35);
+  background: var(--inv-fg);
+}
+.pe-punto:focus-visible {
+  outline: 2px solid var(--inv-fg);
+  outline-offset: -4px;
+}
+
+@media (min-width: 760px) {
+  .pe {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: center;
+    gap: 44px;
+    justify-items: start;
+    margin: 8px 0 38px;
+  }
+  .pe-visor { width: 252px; }
+  .pe-info { text-align: left; max-width: 520px; }
+  .pe-etiqueta { justify-content: flex-start; }
+  .pe-puntos { justify-content: flex-start; margin-left: -11px; }
+  .pe-nombre { font-size: 1.35rem; }
+  .pe-desc { font-size: 1rem; min-height: 3.1em; }
+}
+
+@media (min-width: 1100px) {
+  .pe { gap: 56px; }
+  .pe-visor { width: 276px; }
+  .pe-nombre { font-size: 1.6rem; }
+  .pe-desc { font-size: 1.05rem; }
+}
+
+/* En 375px los 8 botones de 34px no caben por 3px y saltaba uno a una
+   segunda fila. A 30px de ancho caben todos y el area tactil sigue muy
+   por encima del minimo de 24px. */
+@media (max-width: 420px) {
+  .pe-punto { width: 30px; }
+  .pe-puntos { flex-wrap: nowrap; }
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .pe-cinta { animation: none; }
-  .pe-tel:nth-child(even) { transform: none; }
+  .pe-img { transition: none; }
+  .pe-punto::after { transition: none; }
 }

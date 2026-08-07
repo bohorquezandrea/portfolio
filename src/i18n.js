@@ -47,9 +47,24 @@ export const content = {
         {
           n: '01',
           title: 'PlanEat',
+          shotsLabel: 'Pantallas de la app',
           shots: [
-            'planeat/01.webp', 'planeat/02.webp', 'planeat/03.webp', 'planeat/04.webp',
-            'planeat/05.webp', 'planeat/06.webp', 'planeat/07.webp', 'planeat/08.webp'
+            { src: 'planeat/01.webp', nombre: 'Bienvenida',
+              desc: 'Registro y acceso. Una misma cuenta sirve para coach y para atleta.' },
+            { src: 'planeat/02.webp', nombre: 'Inicio del atleta',
+              desc: 'La próxima sesión, lo hecho y lo pendiente, de un vistazo.' },
+            { src: 'planeat/03.webp', nombre: 'Nutrición',
+              desc: 'Macros del día calculadas con Mifflin-St Jeor sobre la actividad real.' },
+            { src: 'planeat/04.webp', nombre: 'Entrenamiento',
+              desc: 'Lo planeado contra lo ejecutado, con el esfuerzo percibido de cada sesión.' },
+            { src: 'planeat/05.webp', nombre: 'Test de perfil',
+              desc: 'Cinco preguntas que definen el tono con el que la app le habla a cada quien.' },
+            { src: 'planeat/06.webp', nombre: 'Perfil y conexiones',
+              desc: 'Coach asignado, entrenador vinculado y la conexión con Strava.' },
+            { src: 'planeat/07.webp', nombre: 'Panel del coach',
+              desc: 'Sus atletas vinculados, con lo pendiente y lo hecho por cada uno.' },
+            { src: 'planeat/08.webp', nombre: 'Asignar entreno',
+              desc: 'Tipo, fecha, duración e indicaciones, directo al calendario del atleta.' }
           ],
           titleEm: 'Coach',
           year: '2026 · Trabajo Fin de Máster',
@@ -543,9 +558,24 @@ export const content = {
         {
           n: '01',
           title: 'PlanEat',
+          shotsLabel: 'App screens',
           shots: [
-            'planeat/01.webp', 'planeat/02.webp', 'planeat/03.webp', 'planeat/04.webp',
-            'planeat/05.webp', 'planeat/06.webp', 'planeat/07.webp', 'planeat/08.webp'
+            { src: 'planeat/01.webp', nombre: 'Welcome',
+              desc: 'Sign-up and login. One account works for both coach and athlete.' },
+            { src: 'planeat/02.webp', nombre: 'Athlete home',
+              desc: 'The next session, what is done and what is pending, at a glance.' },
+            { src: 'planeat/03.webp', nombre: 'Nutrition',
+              desc: 'Daily macros calculated with Mifflin-St Jeor against real activity.' },
+            { src: 'planeat/04.webp', nombre: 'Training',
+              desc: 'Planned against executed, with the perceived effort of each session.' },
+            { src: 'planeat/05.webp', nombre: 'Profile quiz',
+              desc: 'Five questions that set the tone the app uses with each person.' },
+            { src: 'planeat/06.webp', nombre: 'Profile and connections',
+              desc: 'Assigned coach, linked trainer and the Strava connection.' },
+            { src: 'planeat/07.webp', nombre: 'Coach dashboard',
+              desc: 'Their linked athletes, with what is pending and done for each one.' },
+            { src: 'planeat/08.webp', nombre: 'Assign a workout',
+              desc: 'Type, date, duration and notes, straight to the athlete calendar.' }
           ],
           titleEm: 'Coach',
           year: "2026 · Master's thesis",

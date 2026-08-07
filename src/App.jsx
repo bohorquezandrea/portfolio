@@ -297,6 +297,80 @@ function Marquee({ t }) {
    La tarjeta 01 va destacada: usa los tokens de superficie invertida,
    así que en oscuro es el bloque lavanda pleno y en claro se invierte.
    ============================================================= */
+/* Las capturas de PlanEat son pantallas verticales de movil. Se muestran de
+   una en una, completas y a buen tamano: apilarlas en una cinta las dejaba
+   cortadas por los bordes y se leia como un mosaico, no como una app.
+   Solo se usa en tarjetas sin enlace, asi que los botones no quedan
+   anidados dentro de un <a>. */
+function Pantallas({ shots, etiqueta }) {
+  const [activa, setActiva] = useState(0);
+  const [quieta, setQuieta] = useState(false);
+  const total = shots.length;
+
+  useEffect(() => {
+    if (quieta) return;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+    // `activa` va en las dependencias a proposito: al hundir un punto el
+    // temporizador se reinicia desde cero, si no la imagen elegida se iba
+    // sola al segundo siguiente.
+    const id = setTimeout(() => setActiva((v) => (v + 1) % total), 4600);
+    return () => clearTimeout(id);
+  }, [quieta, total, activa]);
+
+  const actual = shots[activa];
+
+  return (
+    <div
+      className="pe"
+      onMouseEnter={() => setQuieta(true)}
+      onMouseLeave={() => setQuieta(false)}
+      onFocus={() => setQuieta(true)}
+      onBlur={() => setQuieta(false)}
+    >
+      <div className="pe-visor">
+        {/* Todas montadas y superpuestas: el cambio es un fundido y la altura
+            no salta. Solo la visible cuenta para lectores de pantalla. */}
+        {shots.map((sh, k) => (
+          <img
+            key={sh.src}
+            className="pe-img"
+            data-activa={k === activa ? '' : undefined}
+            src={`${import.meta.env.BASE_URL}img/proyectos/${sh.src}`}
+            alt={k === activa ? sh.nombre : ''}
+            aria-hidden={k !== activa}
+            loading={k === 0 ? 'eager' : 'lazy'}
+            decoding="async"
+          />
+        ))}
+      </div>
+
+      <div className="pe-info">
+        <span className="pe-etiqueta">
+          {etiqueta}
+          <span className="pe-contador">
+            {String(activa + 1).padStart(2, '0')} / {String(total).padStart(2, '0')}
+          </span>
+        </span>
+        <p className="pe-nombre" aria-live="polite">{actual.nombre}</p>
+        <p className="pe-desc">{actual.desc}</p>
+        <div className="pe-puntos">
+          {shots.map((sh, k) => (
+            <button
+              key={sh.src}
+              type="button"
+              className="pe-punto"
+              data-activa={k === activa ? '' : undefined}
+              aria-label={sh.nombre}
+              aria-current={k === activa ? 'true' : undefined}
+              onClick={() => setActiva(k)}
+            />
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
 function Portfolio({ t }) {
   return (
     <section className="portfolio" id="portfolio">
@@ -332,30 +406,9 @@ function Portfolio({ t }) {
                 className={`proj reveal reveal-delay-${(i % 3) + 1}${i === 0 ? ' is-featured' : ''}${isLink ? ' is-link' : ''}`}
               >
                 {/* Dos formatos de captura, segun lo que pida el proyecto:
-                    `shots` para pantallas verticales de movil, que se muestran
-                    en fila y se recortan por CSS segun el ancho; `img` para una
-                    captura unica apaisada. Meter cinco pantallas verticales
-                    dentro de un marco 8:5 las dejaba diminutas. */}
-                {p.shots && (
-                  <div className="pe-carrusel">
-                    {/* La cinta lleva las pantallas DOS veces: la animacion
-                        la desplaza justo un 50%, asi que al terminar el ciclo
-                        la segunda copia esta donde empezo la primera y el
-                        salto es invisible. */}
-                    <div className="pe-cinta">
-                      {[...p.shots, ...p.shots].map((s, k) => (
-                        <div className="pe-tel" key={k} aria-hidden={k >= p.shots.length}>
-                          <img
-                            src={`${import.meta.env.BASE_URL}img/proyectos/${s}`}
-                            alt=""
-                            loading="lazy"
-                            decoding="async"
-                          />
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                )}
+                    `shots` para pantallas verticales de movil, que se ven de
+                    una en una; `img` para una captura unica apaisada. */}
+                {p.shots && <Pantallas shots={p.shots} etiqueta={p.shotsLabel} />}
                 {!p.shots && p.img && (
                   <div className="proj-shot">
                     <img
