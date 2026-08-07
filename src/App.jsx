@@ -45,9 +45,9 @@ function useTheme() {
   // Oscuro es el tema de marca: es la paleta elegida, no una preferencia
   // del sistema. Sólo una elección explícita en el toggle lo cambia.
   const [theme, setTheme] = useState(() => {
-    if (typeof window === 'undefined') return 'dark';
+    if (typeof window === 'undefined') return 'light';
     const stored = window.localStorage?.getItem('ab-theme');
-    return stored === 'light' || stored === 'dark' ? stored : 'dark';
+    return stored === 'light' || stored === 'dark' ? stored : 'light';
   });
 
   useEffect(() => {
@@ -1092,7 +1092,7 @@ function Footer({ t }) {
 export default function App() {
   const [lang, setLang] = useState(() => {
     if (typeof navigator !== 'undefined') {
-      return navigator.language?.toLowerCase().startsWith('en') ? 'en' : 'es';
+      return 'es';
     }
     return 'es';
   });
