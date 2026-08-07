@@ -302,10 +302,44 @@ function Marquee({ t }) {
    cortadas por los bordes y se leia como un mosaico, no como una app.
    Solo se usa en tarjetas sin enlace, asi que los botones no quedan
    anidados dentro de un <a>. */
-function Pantallas({ shots, etiqueta }) {
+function Pantallas({ shots, etiqueta, textoAvanzar }) {
   const [activa, setActiva] = useState(0);
   const [quieta, setQuieta] = useState(false);
   const total = shots.length;
+  const toque = useRef(null);
+
+  const mover = useCallback(
+    (paso) => setActiva((v) => (v + paso + total) % total),
+    [total]
+  );
+
+  // Deslizar en la pantalla. Se mide en touchend contra el punto de partida:
+  // si el gesto es mas horizontal que vertical y pasa de 40px, cambia de
+  // captura; si no, se deja pasar como scroll normal de la pagina.
+  const alEmpezarToque = (e) => {
+    const t = e.changedTouches[0];
+    toque.current = { x: t.clientX, y: t.clientY, deslizo: false };
+  };
+  const alTerminarToque = (e) => {
+    const p = toque.current;
+    if (!p) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - p.x;
+    const dy = t.clientY - p.y;
+    if (Math.abs(dx) > 40 && Math.abs(dx) > Math.abs(dy)) {
+      p.deslizo = true;
+      mover(dx < 0 ? 1 : -1);
+    }
+  };
+  // El click llega despues del touchend en pantallas tactiles: si acaba de
+  // haber un deslizamiento hay que ignorarlo o avanzaria dos veces.
+  const alTocar = () => {
+    if (toque.current && toque.current.deslizo) {
+      toque.current.deslizo = false;
+      return;
+    }
+    mover(1);
+  };
 
   useEffect(() => {
     if (quieta) return;
@@ -327,7 +361,16 @@ function Pantallas({ shots, etiqueta }) {
       onFocus={() => setQuieta(true)}
       onBlur={() => setQuieta(false)}
     >
-      <div className="pe-visor">
+      {/* Es un <button> y no un <div> con onClick para que tambien funcione
+          con teclado y lo anuncien los lectores de pantalla. */}
+      <button
+        type="button"
+        className="pe-visor"
+        onClick={alTocar}
+        onTouchStart={alEmpezarToque}
+        onTouchEnd={alTerminarToque}
+        aria-label={textoAvanzar}
+      >
         {/* Todas montadas y superpuestas: el cambio es un fundido y la altura
             no salta. Solo la visible cuenta para lectores de pantalla. */}
         {shots.map((sh, k) => (
@@ -342,7 +385,7 @@ function Pantallas({ shots, etiqueta }) {
             decoding="async"
           />
         ))}
-      </div>
+      </button>
 
       <div className="pe-info">
         <span className="pe-etiqueta">
@@ -436,7 +479,13 @@ function Portfolio({ t }) {
                 </ul>
                 {isLink && <span className="proj-link">{p.linkLabel} ↗</span>}
                 {!isLink && p.note && <span className="proj-note">{p.note}</span>}
-                {p.shots && <Pantallas shots={p.shots} etiqueta={p.shotsLabel} />}
+                {p.shots && (
+                  <Pantallas
+                    shots={p.shots}
+                    etiqueta={p.shotsLabel}
+                    textoAvanzar={t.portfolio.shotsNext}
+                  />
+                )}
               </Tag>
             );
           })}
@@ -737,33 +786,45 @@ function OlimpicaSlideshow({ t }) {
         </div>
       </div>
 
-      <div className="slideshow-stage">
-        {slides.map((s, i) => (
-          <a
-            key={i}
-            href={s.url}
-            target="_blank"
-            rel="noreferrer"
-            className={`slideshow-slide ${idx === i ? 'is-active' : ''}`}
-            aria-hidden={idx !== i}
-            tabIndex={idx === i ? 0 : -1}
-          >
-            <img
-              src={`${import.meta.env.BASE_URL}img/cases/${s.file}`}
-              alt={s.name}
-              loading="lazy"
-              onError={(e) => {
-                e.currentTarget.style.display = 'none';
-                e.currentTarget.parentElement.classList.add('no-image');
-              }}
-            />
-            <div className="slideshow-caption">
-              <span className="slide-name">{s.name}</span>
-              <span className="slide-note">{s.note}</span>
-              <span className="slide-link">olimpica.com ↗</span>
-            </div>
-          </a>
-        ))}
+      {/* El pie sale del marco: superpuesto sobre la imagen en escritorio,
+          pero debajo en movil, donde el degradado tapaba media captura y no
+          se distinguia nada de la pagina. */}
+      <div className="slideshow-marco">
+        <div className="slideshow-stage">
+          {slides.map((s, i) => (
+            <a
+              key={i}
+              href={s.url}
+              target="_blank"
+              rel="noreferrer"
+              className={`slideshow-slide ${idx === i ? 'is-active' : ''}`}
+              aria-hidden={idx !== i}
+              tabIndex={idx === i ? 0 : -1}
+              aria-label={s.name}
+            >
+              <img
+                src={`${import.meta.env.BASE_URL}img/cases/${s.file}`}
+                alt={s.name}
+                loading="lazy"
+                onError={(e) => {
+                  e.currentTarget.style.display = 'none';
+                  e.currentTarget.parentElement.classList.add('no-image');
+                }}
+              />
+            </a>
+          ))}
+        </div>
+
+        <a
+          className="slideshow-caption"
+          href={slides[idx].url}
+          target="_blank"
+          rel="noreferrer"
+        >
+          <span className="slide-name">{slides[idx].name}</span>
+          <span className="slide-note">{slides[idx].note}</span>
+          <span className="slide-link">olimpica.com ↗</span>
+        </a>
       </div>
     </div>
   );

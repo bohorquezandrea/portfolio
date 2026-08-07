@@ -42,6 +42,7 @@ export const content = {
       titleEm: 'por mi cuenta.',
       sub: 'Proyectos donde escribo cada capa: modelo de datos, API, interfaz y tests. Aquí no hay cliente que apruebe wireframes. Hay decisiones técnicas que sostengo yo.',
       stackLabel: 'Stack',
+      shotsNext: 'Ver la siguiente pantalla',
       noLinkNote: 'Repositorio privado',
       items: [
         {
@@ -511,7 +512,7 @@ export const content = {
       city: 'Barranquilla, Colombia · trabajo remoto',
       socialTitle: 'Sígueme',
       menuTitle: 'Menú',
-      linkedin: 'https://www.linkedin.com/in/andrea-bohórquez-ab34bb15b',
+      linkedin: 'https://www.linkedin.com/in/bohorquezandrea/',
       github: 'https://github.com/bohorquezandrea',
       copy: '© 2026 Andrea Bohorquez'
     }
@@ -553,6 +554,7 @@ export const content = {
       titleEm: 'on my own.',
       sub: 'Projects where I write every layer: data model, API, interface and tests. No client signing off wireframes here. Just technical decisions I own.',
       stackLabel: 'Stack',
+      shotsNext: 'See the next screen',
       noLinkNote: 'Private repository',
       items: [
         {
@@ -1022,7 +1024,7 @@ export const content = {
       city: 'Barranquilla, Colombia · remote work',
       socialTitle: 'Follow',
       menuTitle: 'Menu',
-      linkedin: 'https://www.linkedin.com/in/andrea-bohórquez-ab34bb15b',
+      linkedin: 'https://www.linkedin.com/in/bohorquezandrea/',
       github: 'https://github.com/bohorquezandrea',
       copy: '© 2026 Andrea Bohorquez'
     }

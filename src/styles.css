@@ -1107,6 +1107,20 @@ section { padding: 110px 0; position: relative; }
 .stack-dot:hover { background: var(--rose-soft); }
 .stack-dot.is-active { background: var(--rose); width: 44px; }
 
+/* En movil las flechas redondas quedaban a caballo sobre los bordes de la
+   tarjeta: el flex las encogia a 32px y las empujaba fuera del ancho de la
+   tarjeta. Se quitan y los puntos pasan a ser el unico control, asi que se
+   les da area tactil de 24px sin engordar la barra que se ve (la pinta el
+   content-box). */
+@media (max-width: 759px) {
+  .stack-arrow { display: none; }
+  .stack-dot {
+    height: 24px;
+    padding: 10px 0;
+    background-clip: content-box;
+  }
+}
+
 .stack-counter {
   text-align: center;
   margin-top: 16px;
@@ -1250,7 +1264,9 @@ section { padding: 110px 0; position: relative; }
 .slideshow-dot {
   width: 30px; height: 4px;
   border: 0;
-  background: var(--line);
+  /* --line es el token de filete de 1px: daba 1.55:1 y estos puntos son
+     controles, les aplica el minimo de 3:1 no textual. */
+  background: var(--ink-muted);
   border-radius: 4px;
   padding: 0;
   transition: background 0.3s var(--ease), transform 0.3s var(--ease), width 0.3s var(--ease);
@@ -1293,18 +1309,39 @@ section { padding: 110px 0; position: relative; }
   font-size: 22px;
   letter-spacing: 0.08em;
 }
+.slideshow-marco { position: relative; }
+
+/* Movil: el pie va debajo de la imagen, sobre el fondo de la tarjeta, para
+   que la captura se vea entera. */
 .slideshow-caption {
-  position: absolute;
-  left: 0; right: 0; bottom: 0;
-  padding: 24px 28px;
-  /* El degradado llega a opacidad plena en 40% (antes 70%) para que la
-     primera línea del caption también caiga sobre zona oscura: si no,
-     en tema claro el texto crema quedaba sobre el degradado casi
-     transparente encima de una tarjeta clara. */
-  background: linear-gradient(180deg, transparent 0%, var(--scrim) 40%, var(--scrim) 100%);
-  color: var(--on-media);
   display: flex; flex-direction: column; gap: 4px;
+  padding: 14px 2px 0;
+  color: var(--ink);
   font-family: var(--sans);
+  text-decoration: none;
+}
+.slideshow-caption .slide-note { color: var(--ink-muted); }
+.slideshow-caption .slide-link { color: var(--rose); }
+
+/* Escritorio: vuelve a superponerse sobre la imagen, donde si hay sitio */
+@media (min-width: 760px) {
+  .slideshow-caption {
+    position: absolute;
+    left: 0; right: 0; bottom: 0;
+    /* La diapositiva activa lleva z-index:2 y antes el pie iba dentro de
+       ella. Ahora es hermano, asi que necesita subir por encima o queda
+       tapado por la imagen. */
+    z-index: 3;
+    padding: 24px 28px;
+    /* El degradado llega a opacidad plena en 40% para que la primera linea
+       tambien caiga sobre zona oscura: si no, en tema claro el texto crema
+       quedaba sobre el degradado casi transparente encima de una tarjeta
+       clara. */
+    background: linear-gradient(180deg, transparent 0%, var(--scrim) 40%, var(--scrim) 100%);
+    color: var(--on-media);
+  }
+  .slideshow-caption .slide-note { color: var(--on-media-soft); }
+  .slideshow-caption .slide-link { color: var(--rose-soft); }
 }
 .slide-name {
   font-family: var(--sans);
@@ -1312,7 +1349,6 @@ section { padding: 110px 0; position: relative; }
 }
 .slide-note {
   font-size: 12px;
-  color: var(--on-media-soft);
   letter-spacing: 0.04em;
 }
 .slide-link {
@@ -1320,7 +1356,6 @@ section { padding: 110px 0; position: relative; }
   font-size: 10px;
   letter-spacing: 0.28em;
   text-transform: uppercase;
-  color: var(--rose-soft);
 }
 
 /* =====================================================
@@ -1611,7 +1646,16 @@ section { padding: 110px 0; position: relative; }
   .hero-meta { padding-left: 0; border-left: 0; border-top: 1px solid var(--line); padding-top: 20px; }
   .marquee .label { padding-left: 16px; }
   .olimpica-slideshow { padding: 22px; }
-  .slideshow-caption { padding: 16px 18px; }
+  /* La captura llega a los bordes de la tarjeta: en un movil de 392px el
+     doble padding se comia 100px de imagen. */
+  .slideshow-stage {
+    margin-left: -22px;
+    margin-right: -22px;
+    border-radius: 0;
+    border-left: 0;
+    border-right: 0;
+  }
+
   .stack-slideshow { padding: 24px 16px; }
   .stack-slide { padding: 24px 12px 36px; }
   .mid-cta-frame { padding: 40px 24px; }
@@ -1856,6 +1900,14 @@ section { padding: 110px 0; position: relative; }
 
 .pe-visor {
   position: relative;
+  display: block;
+  padding: 0;
+  appearance: none;
+  cursor: pointer;
+  /* El navegador se queda el desplazamiento vertical (scroll de la pagina)
+     y nos deja el horizontal para cambiar de captura. */
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
   width: min(100%, 232px);
   /* Fija el alto desde el ancho, asi el fundido no salta al cambiar */
   aspect-ratio: 460 / 997;
@@ -1863,6 +1915,11 @@ section { padding: 110px 0; position: relative; }
   overflow: hidden;
   background: var(--inv-fg);
   border: 1px solid var(--inv-line);
+}
+
+.pe-visor:focus-visible {
+  outline: 2px solid var(--inv-fg);
+  outline-offset: 3px;
 }
 
 .pe-img {
