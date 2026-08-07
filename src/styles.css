@@ -1098,14 +1098,24 @@ section { padding: 110px 0; position: relative; }
 .stack-dots { display: inline-flex; gap: 8px; }
 .stack-dot {
   width: 26px; height: 4px;
-  background: rgba(255,255,255,0.18);
+  /* rgba blanco al 18% sobre el noir daba 1.76:1 y son controles: les
+     aplica el minimo de 3:1 no textual. --on-noir-muted esta medido en
+     6.9:1 sobre este mismo fondo. */
+  background: var(--on-noir-muted);
   border: 0;
   border-radius: 4px;
   padding: 0;
-  transition: background 0.3s var(--ease), width 0.3s var(--ease);
+  transition: background-color 0.3s var(--ease);
 }
-.stack-dot:hover { background: var(--rose-soft); }
-.stack-dot.is-active { background: var(--rose); width: 44px; }
+/* Solo cambia el color, nunca el tamano. Y se usa `background-color` y no
+   el abreviado `background`, porque el abreviado reinicia el
+   `background-clip: content-box` que da el area tactil en movil: el punto
+   activo pintaba los 24px enteros y salia un rectangulo gigante. */
+/* Esta seccion es siempre oscura, pero --rose si gira con el tema y en
+   claro es un morado oscuro: el punto activo caia a 2.24:1. --on-noir-accent
+   es el lavanda medido en 9.8:1 sobre este fondo y no gira. */
+.stack-dot:hover { background-color: var(--rose-soft); }
+.stack-dot.is-active { background-color: var(--on-noir-accent); }
 
 /* En movil las flechas redondas quedaban a caballo sobre los bordes de la
    tarjeta: el flex las encogia a 32px y las empujaba fuera del ancho de la
@@ -1269,10 +1279,10 @@ section { padding: 110px 0; position: relative; }
   background: var(--ink-muted);
   border-radius: 4px;
   padding: 0;
-  transition: background 0.3s var(--ease), transform 0.3s var(--ease), width 0.3s var(--ease);
+  transition: background-color 0.3s var(--ease);
 }
-.slideshow-dot:hover { background: var(--rose-soft); }
-.slideshow-dot.is-active { background: var(--rose); width: 50px; }
+.slideshow-dot:hover { background-color: var(--rose-soft); }
+.slideshow-dot.is-active { background-color: var(--rose); }
 
 .slideshow-stage {
   position: relative;
