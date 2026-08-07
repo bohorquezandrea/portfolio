@@ -1622,6 +1622,10 @@ section { padding: 110px 0; position: relative; }
 }
 .footer .brand { color: var(--noir-text); margin-bottom: 14px; }
 .footer .brand-mark { background: transparent; }
+/* El pie es siempre oscuro, pase lo que pase con el tema. En tema claro el
+   logo giraba a la version oscura y desaparecia sobre el fondo del pie. */
+[data-theme='light'] .footer .brand-mark .logo-claro  { display: block; }
+[data-theme='light'] .footer .brand-mark .logo-oscuro { display: none; }
 
 .footer p, .footer a { font-size: 14px; line-height: 1.7; }
 .footer h5 {
