@@ -26,7 +26,18 @@ jobs:
           node-version: 20
           cache: npm
       - run: npm ci
+      - run: npm test
+      # Las variables VITE_ se incrustan en el JavaScript al compilar, asi
+      # que tienen que existir AQUI, no en el servidor. Son publicas por
+      # diseno; los secretos de verdad viven dentro de Supabase.
+      # Si un secreto no esta puesto, queda vacio y el formulario avisa de
+      # que no esta conectado en vez de romperse.
       - run: npm run build
+        env:
+          VITE_SUPABASE_URL: ${{ secrets.VITE_SUPABASE_URL }}
+          VITE_SUPABASE_ANON_KEY: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+          VITE_TURNSTILE_SITE_KEY: ${{ secrets.VITE_TURNSTILE_SITE_KEY }}
+          VITE_CAL_LINK: ${{ secrets.VITE_CAL_LINK }}
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

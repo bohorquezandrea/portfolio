@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState, useCallback, useLayoutEffect } from
 import { content } from './i18n.js';
 import logoClaro from './assets/logo-ab-claro.png';
 import logoOscuro from './assets/logo-ab-oscuro.png';
+import Contacto from './Contacto.jsx';
 
 /* =============================================================
    useReveal: IntersectionObserver hook
@@ -1025,30 +1026,6 @@ function FAQ({ t }) {
 }
 
 /* =============================================================
-   CTA Final
-   ============================================================= */
-function CTAFinal({ t }) {
-  return (
-    <section className="cta-final" id="cta">
-      <div className="container">
-        <h2 className="reveal">
-          {t.cta.title} <em>{t.cta.titleEm}</em>
-        </h2>
-        <p className="reveal reveal-delay-1">{t.cta.sub}</p>
-        <a
-          className="btn reveal reveal-delay-2"
-          href={`mailto:${t.footer.email}?subject=${encodeURIComponent('Quiero construir algo contigo')}`}
-        >
-          {t.cta.btn}
-          <span className="arrow">→</span>
-        </a>
-        <div className="cta-secondary reveal reveal-delay-3">{t.cta.sec}</div>
-      </div>
-    </section>
-  );
-}
-
-/* =============================================================
    Footer
    ============================================================= */
 function Footer({ t }) {
@@ -1129,7 +1106,7 @@ export default function App() {
         <Process t={t} />
         <Guarantee t={t} />
         <FAQ t={t} />
-        <CTAFinal t={t} />
+        <Contacto t={t} idioma={lang} tema={theme} />
       </main>
       <Footer t={t} />
     </>

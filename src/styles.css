@@ -41,6 +41,7 @@
   --on-noir-accent:  #C9B8F5;  /*  9.8:1 · lavanda */
   --on-noir-warm:    #EDBEB0;  /* 10.6:1 · durazno */
   --on-noir-line:    #22453A;
+  --on-noir-error:   #FFA79B;  /*  9.7:1 · errores de formulario */
 
   /* Sobre imágenes: independiente del tema: la foto siempre va debajo */
   --scrim:           rgba(11, 25, 19, 0.78);
@@ -2060,4 +2061,325 @@ section { padding: 110px 0; position: relative; }
 @media (prefers-reduced-motion: reduce) {
   .pe-img { transition: none; }
   .pe-punto::after { transition: none; }
+}
+
+/* =====================================================
+   FORMULARIO DE CONTACTO
+
+   Vive dentro de .cta-final, que usa --noir y NO gira con el tema: es
+   oscura tanto en claro como en oscuro. Por eso todos los colores de
+   aqui salen de los tokens --on-noir-*, que estan medidos sobre ese
+   fondo. Usar --ink o --rose aqui rompe el contraste en tema claro.
+   ===================================================== */
+.cta-final .container { position: relative; z-index: 1; }
+
+.co-intro {
+  max-width: 52ch;
+  margin: 0 auto 40px;
+  color: var(--on-noir-soft);
+  font-size: 1.05rem;
+  line-height: 1.6;
+}
+
+.co-form {
+  max-width: 760px;
+  margin: 0 auto;
+  text-align: left;   /* .cta-final centra, el formulario no */
+}
+
+.co-grupo {
+  border: 0;
+  padding: 0;
+  margin: 0 0 34px;
+}
+
+.co-leyenda {
+  padding: 0;
+  margin-bottom: 18px;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--on-noir-accent);
+}
+
+.co-rejilla {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 20px;
+}
+
+.co-campo { display: flex; flex-direction: column; min-width: 0; }
+.co-ancho { grid-column: 1 / -1; margin-top: 20px; }
+
+.co-etiqueta {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--noir-text);
+  margin-bottom: 6px;
+}
+
+.co-opcional {
+  font-weight: 400;
+  color: var(--on-noir-muted);
+  text-transform: none;
+  letter-spacing: 0;
+}
+
+.co-pista {
+  font-size: 0.82rem;
+  color: var(--on-noir-muted);
+  margin-bottom: 8px;
+  line-height: 1.45;
+}
+
+.co-form input[type='text'],
+.co-form input[type='email'],
+.co-form input[type='tel'],
+.co-form select,
+.co-form textarea {
+  width: 100%;
+  min-width: 0;
+  font: inherit;
+  font-size: 1rem;
+  color: var(--noir-text);
+  background: rgba(245, 238, 224, 0.05);
+  border: 1px solid var(--on-noir-line);
+  border-radius: 10px;
+  padding: 13px 14px;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+  /* 16px evita que iOS haga zoom al enfocar un campo */
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.co-form textarea { resize: vertical; min-height: 108px; line-height: 1.55; }
+
+.co-form select {
+  /* La flecha se dibuja aqui porque appearance:none quita la del sistema */
+  background-image: linear-gradient(45deg, transparent 50%, var(--on-noir-soft) 50%),
+                    linear-gradient(135deg, var(--on-noir-soft) 50%, transparent 50%);
+  background-position: calc(100% - 19px) calc(50% + 2px), calc(100% - 13px) calc(50% + 2px);
+  background-size: 6px 6px, 6px 6px;
+  background-repeat: no-repeat;
+  padding-right: 40px;
+  cursor: pointer;
+}
+/* El desplegable nativo se pinta con los colores del sistema: hay que
+   forzar el fondo o en algunos navegadores sale texto claro sobre claro */
+.co-form select option,
+.co-form select optgroup { background: var(--noir); color: var(--noir-text); }
+
+.co-form input::placeholder,
+.co-form textarea::placeholder { color: var(--on-noir-muted); }
+
+.co-form input:focus-visible,
+.co-form select:focus-visible,
+.co-form textarea:focus-visible {
+  outline: 2px solid var(--on-noir-accent);
+  outline-offset: 2px;
+  border-color: var(--on-noir-accent);
+  background: rgba(245, 238, 224, 0.08);
+}
+
+.co-campo.tiene-error input,
+.co-campo.tiene-error select,
+.co-campo.tiene-error textarea,
+.co-radios.tiene-error { border-color: var(--on-noir-error); }
+
+.co-error {
+  display: block;
+  margin-top: 7px;
+  font-size: 0.84rem;
+  line-height: 1.45;
+  color: var(--on-noir-error);
+}
+
+.co-cuenta {
+  margin-top: 6px;
+  font-size: 0.78rem;
+  color: var(--on-noir-muted);
+  text-align: right;
+}
+
+/* Telefono: el prefijo es un adorno, el input es lo que se rellena */
+.co-tel { display: flex; align-items: stretch; gap: 8px; }
+.co-prefijo {
+  display: grid;
+  place-items: center;
+  padding: 0 13px;
+  min-width: 62px;
+  font-size: 0.95rem;
+  font-variant-numeric: tabular-nums;
+  color: var(--on-noir-soft);
+  background: rgba(245, 238, 224, 0.05);
+  border: 1px solid var(--on-noir-line);
+  border-radius: 10px;
+}
+
+/* Radios */
+.co-radios { border: 0; padding: 0; margin: 0; }
+.co-radios-fila { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 4px; }
+
+.co-radio {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 16px;
+  border: 1px solid var(--on-noir-line);
+  border-radius: 999px;
+  cursor: pointer;
+  color: var(--on-noir-soft);
+  transition: border-color 0.25s var(--ease), color 0.25s var(--ease),
+              background 0.25s var(--ease);
+}
+.co-radio:hover { border-color: var(--on-noir-accent); color: var(--noir-text); }
+.co-radio input { accent-color: var(--on-noir-accent); width: 17px; height: 17px; margin: 0; }
+.co-radio:has(input:checked) {
+  border-color: var(--on-noir-accent);
+  background: rgba(201, 184, 245, 0.12);
+  color: var(--noir-text);
+}
+.co-radio:has(input:focus-visible) { outline: 2px solid var(--on-noir-accent); outline-offset: 2px; }
+
+/* Honeypot: fuera de la vista sin usar display:none, porque algunos bots
+   se saltan lo que esta oculto de esa forma */
+.co-trampa {
+  position: absolute;
+  left: -9999px;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+}
+
+.co-turnstile { margin: 6px 0 18px; min-height: 65px; }
+
+.co-avisos:empty { display: none; }
+.co-aviso-error { color: var(--on-noir-error); font-size: 0.9rem; margin: 0 0 14px; }
+
+.co-fallo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  margin-bottom: 16px;
+  border: 1px solid var(--on-noir-error);
+  border-radius: 10px;
+  background: rgba(255, 169, 160, 0.08);
+  color: var(--on-noir-soft);
+  font-size: 0.92rem;
+  line-height: 1.5;
+}
+.co-fallo strong { color: var(--on-noir-error); }
+
+/* Boton de envio */
+.co-enviar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  padding: 17px 30px;
+  font: inherit;
+  font-size: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--noir);
+  background: var(--on-noir-accent);
+  border: 1px solid var(--on-noir-accent);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), opacity 0.25s var(--ease);
+}
+.co-enviar:hover:not(:disabled) { transform: translateY(-2px); }
+.co-enviar:focus-visible { outline: 2px solid var(--noir-text); outline-offset: 3px; }
+.co-enviar:disabled { opacity: 0.72; cursor: progress; transform: none; }
+.co-enviar .arrow { transition: transform 0.25s var(--ease); }
+.co-enviar:hover:not(:disabled) .arrow { transform: translateX(4px); }
+
+.co-girador {
+  width: 15px;
+  height: 15px;
+  border: 2px solid color-mix(in srgb, var(--noir) 30%, transparent);
+  border-top-color: var(--noir);
+  border-radius: 50%;
+  animation: coGirar 0.7s linear infinite;
+}
+@keyframes coGirar { to { transform: rotate(360deg); } }
+
+.co-nota-config {
+  margin-top: 14px;
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--on-noir-muted);
+}
+
+.co-btn-secundario {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 13px 26px;
+  font: inherit;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--noir-text);
+  background: transparent;
+  border: 1px solid var(--on-noir-line);
+  border-radius: 999px;
+  cursor: pointer;
+  transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
+}
+.co-btn-secundario:hover { border-color: var(--on-noir-accent); background: rgba(201, 184, 245, 0.1); }
+.co-btn-secundario:focus-visible { outline: 2px solid var(--on-noir-accent); outline-offset: 2px; }
+
+/* Confirmacion */
+.co-exito {
+  max-width: 46ch;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.co-exito-marca {
+  display: grid;
+  place-items: center;
+  width: 58px;
+  height: 58px;
+  font-size: 26px;
+  color: var(--noir);
+  background: var(--on-noir-accent);
+  border-radius: 50%;
+  margin-bottom: 6px;
+}
+.co-exito h2 { margin: 0; }
+.co-exito p { color: var(--on-noir-soft); margin: 0 0 10px; line-height: 1.6; }
+
+/* Agenda */
+.co-agenda {
+  max-width: 760px;
+  margin: 48px auto 0;
+  padding-top: 40px;
+  border-top: 1px solid var(--on-noir-line);
+  text-align: left;
+}
+.co-agenda-titulo {
+  font-size: 1.3rem;
+  font-weight: var(--w-heading);
+  color: var(--noir-text);
+  margin: 0 0 8px;
+}
+.co-agenda-sub {
+  color: var(--on-noir-soft);
+  margin: 0 0 20px;
+  line-height: 1.6;
+  max-width: 56ch;
+}
+.co-agenda-cargando { color: var(--on-noir-muted); font-size: 0.92rem; }
+.co-agenda-marco { margin-top: 18px; min-height: 0; border-radius: 14px; overflow: hidden; }
+
+@media (min-width: 720px) {
+  .co-rejilla { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 22px; }
+  .co-enviar { width: auto; min-width: 260px; }
+  .co-intro { font-size: 1.12rem; }
 }
