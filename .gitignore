@@ -22,6 +22,11 @@ Thumbs.db
 *.swp
 *~
 
+# Estado local del CLI de Supabase. Lleva el identificador del proyecto y
+# la URL del pooler: no son secretos, pero es basura de maquina, no codigo.
+supabase/.temp/
+supabase/.branches/
+
 # Registros y temporales
 *.log
 npm-debug.log*
