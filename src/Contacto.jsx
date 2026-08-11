@@ -49,43 +49,85 @@ function cargarTurnstile() {
     .then(() => window.turnstile);
 }
 
-function useTurnstile(activo, tema) {
+function useTurnstile() {
   const contenedor = useRef(null);
   const widget = useRef(null);
   const [token, setToken] = useState('');
+  const [estado, setEstado] = useState(TURNSTILE_SITE_KEY ? 'cargando' : 'apagado');
+  const [codigo, setCodigo] = useState('');
+  const [intento, setIntento] = useState(0);
 
   useEffect(() => {
-    if (!activo || !TURNSTILE_SITE_KEY || !contenedor.current) return;
+    if (!TURNSTILE_SITE_KEY) return;
+    const nodo = contenedor.current;
+    if (!nodo) return;
+
     let vivo = true;
+
+    // Guardia en el propio nodo del DOM, no en un ref. En desarrollo React
+    // corre los efectos dos veces sobre EL MISMO div, y el ref todavía está
+    // vacío cuando se ejecuta la limpieza porque render() es asíncrono.
+    // Pintar dos widgets en el mismo contenedor invalida el desafío en curso
+    // y Cloudflare entra en un bucle de reintentos con error 400020.
+    if (nodo.dataset.turnstileMontado === '1') return;
+    nodo.dataset.turnstileMontado = '1';
 
     cargarTurnstile()
       .then((ts) => {
-        if (!vivo || !contenedor.current || widget.current !== null) return;
+        if (!vivo || !contenedor.current) return;
         widget.current = ts.render(contenedor.current, {
           sitekey: TURNSTILE_SITE_KEY,
-          theme: tema === 'light' ? 'light' : 'dark',
-          callback: (t) => setToken(t),
-          'expired-callback': () => setToken(''),
-          'error-callback': () => setToken('')
+          // Siempre oscuro: esta sección usa --noir y no gira con el tema.
+          // Además evita volver a pintar el widget al cambiar de tema, que
+          // es justo lo que dispara el bucle de reintentos.
+          theme: 'dark',
+          callback: (t) => { setToken(t); setEstado('listo'); setCodigo(''); },
+          'expired-callback': () => { setToken(''); setEstado('expirado'); },
+          'timeout-callback': () => { setToken(''); setEstado('expirado'); },
+          'error-callback': (c) => {
+            setToken('');
+            setEstado('error');
+            setCodigo(String(c || ''));
+            // Devolver true evita que Cloudflare siga reintentando solo:
+            // el reintento pasa a ser explícito, con el botón.
+            return true;
+          }
         });
       })
-      .catch(() => setToken(''));
+      .catch(() => {
+        if (!vivo) return;
+        setEstado('error');
+        setCodigo('script');
+      });
 
     return () => {
       vivo = false;
       if (widget.current !== null && window.turnstile) {
-        window.turnstile.remove(widget.current);
+        try { window.turnstile.remove(widget.current); } catch { /* ya no existe */ }
         widget.current = null;
       }
+      if (nodo) delete nodo.dataset.turnstileMontado;
     };
-  }, [activo, tema]);
+  }, [intento]);
 
   const reiniciar = useCallback(() => {
     setToken('');
-    if (widget.current !== null && window.turnstile) window.turnstile.reset(widget.current);
+    setCodigo('');
+    if (widget.current !== null && window.turnstile) {
+      try {
+        window.turnstile.reset(widget.current);
+        setEstado('cargando');
+        return;
+      } catch { /* el widget murió, se vuelve a montar entero */ }
+    }
+    // Forzar un montaje limpio
+    if (contenedor.current) delete contenedor.current.dataset.turnstileMontado;
+    widget.current = null;
+    setEstado('cargando');
+    setIntento((n) => n + 1);
   }, []);
 
-  return { contenedor, token, reiniciar };
+  return { contenedor, token, estado, codigo, reiniciar };
 }
 
 /* =============================================================
@@ -96,9 +138,9 @@ function useTurnstile(activo, tema) {
    eso en cada campo es donde se cuelan los fallos de accesibilidad.
    ============================================================= */
 function Campo({ id, etiqueta, pista, error, obligatorio, textoOpcional, prefijo, children, extra }) {
-  const idPista = pista ? `${id}-pista` : undefined;
+  const idPista = `${id}-pista`;
   const idError = error ? `${id}-error` : undefined;
-  const descrito = [idError, idPista].filter(Boolean).join(' ') || undefined;
+  const descrito = [idError, pista ? idPista : null].filter(Boolean).join(' ') || undefined;
 
   // El id va SIEMPRE al control, nunca a un envoltorio: si lo recibe un div,
   // el <label for> apunta a un div y el campo se queda sin nombre accesible.
@@ -115,7 +157,12 @@ function Campo({ id, etiqueta, pista, error, obligatorio, textoOpcional, prefijo
         {etiqueta}
         {!obligatorio && <span className="co-opcional"> ({textoOpcional})</span>}
       </label>
-      {pista && <span id={idPista} className="co-pista">{pista}</span>}
+      {/* Siempre presente, aunque vaya vacía: en la rejilla de dos columnas
+          un campo con pista y otro sin ella dejaban los inputs 27px
+          desalineados. Reservar la línea los cuadra sin subgrid. */}
+      <span id={idPista} className="co-pista" aria-hidden={pista ? undefined : 'true'}>
+        {pista || '\u00A0'}
+      </span>
       {prefijo ? (
         <div className="co-tel">
           <span className="co-prefijo" aria-hidden="true">{prefijo}</span>
@@ -204,8 +251,11 @@ export default function Contacto({ t, idioma, tema }) {
   const abortRef = useRef(null);
   const idBase = useId();
 
-  const { contenedor: refTurnstile, token, reiniciar: reiniciarTurnstile } =
-    useTurnstile(true, tema);
+  const {
+    contenedor: refTurnstile, token,
+    estado: estadoAntispam, codigo: codigoAntispam,
+    reiniciar: reiniciarTurnstile
+  } = useTurnstile();
 
   const paises = useMemo(() => listaPaises(idioma), [idioma]);
   const ciudades = useMemo(() => ciudadesDe(datos.pais), [datos.pais]);
@@ -256,6 +306,12 @@ export default function Contacto({ t, idioma, tema }) {
     if (Object.keys(fallos).length > 0) {
       const primero = Object.keys(fallos)[0];
       formRef.current?.querySelector(`[name="${primero}"]`)?.focus();
+      return;
+    }
+
+    if (TURNSTILE_SITE_KEY && !token) {
+      setFalloEnvio('antispamPendiente');
+      formRef.current?.querySelector('.co-antispam')?.scrollIntoView({ block: 'center' });
       return;
     }
 
@@ -464,7 +520,27 @@ export default function Contacto({ t, idioma, tema }) {
             )}
           </fieldset>
 
-          {TURNSTILE_SITE_KEY && <div className="co-turnstile" ref={refTurnstile} />}
+          {TURNSTILE_SITE_KEY && (
+            <div className="co-antispam">
+              <div className="co-turnstile" ref={refTurnstile} />
+              {(estadoAntispam === 'error' || estadoAntispam === 'expirado') && (
+                <div className="co-antispam-fallo" role="alert">
+                  <span>
+                    {estadoAntispam === 'expirado'
+                      ? t.contacto.antispam.expirado
+                      : t.contacto.antispam.error}
+                    {codigoAntispam && (
+                      <span className="co-antispam-codigo"> ({codigoAntispam})</span>
+                    )}
+                  </span>
+                  <button type="button" className="co-btn-secundario co-btn-mini"
+                          onClick={reiniciarTurnstile}>
+                    {t.contacto.antispam.reintentar}
+                  </button>
+                </div>
+              )}
+            </div>
+          )}
 
           {/* aria-live para que el fallo se anuncie sin mover el foco */}
           <div aria-live="polite" className="co-avisos">

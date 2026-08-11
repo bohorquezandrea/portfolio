@@ -1,5 +1,5 @@
 import { describe, it, expect } from 'vitest';
-import { validarCampo, validarTodo, esValido, PROYECTOS, METODOS_CONTACTO } from './validarLead.js';
+import { validarCampo, validarTodo, esValido, sugerenciaDeCorreo, PROYECTOS, METODOS_CONTACTO } from './validarLead.js';
 
 /* Un lead completo y correcto, del que parten los casos que cambian
    una sola cosa para comprobar que esa cosa es la que falla. */
@@ -34,13 +34,32 @@ describe('correo', () => {
   it.each([
     ['ana@empresa.com', null],
     ['ana.maria+lead@sub.dominio.co', null],
+    ['a@b.co', null],
     ['sin-arroba.com', 'correoInvalido'],
     ['ana@sindominio', 'correoInvalido'],
     ['ana con espacio@empresa.com', 'correoInvalido'],
     ['@empresa.com', 'correoInvalido'],
+    ['ana@@empresa.com', 'correoInvalido'],
+    ['ana@empresa..com', 'correoInvalido'],
+    ['ana@empresa.c', 'correoInvalido'],
+    ['ana@.com', 'correoInvalido'],
+    ['ana@empresa.com.', 'correoInvalido'],
     ['', 'correoVacio']
   ])('%s', (entrada, esperado) => {
     expect(validarCampo('correo', entrada)).toBe(esperado);
+  });
+
+  it('avisa de las erratas típicas de dominio en vez de tragárselas', () => {
+    expect(validarCampo('correo', 'ana@gmail.co')).toBe('correoErrata');
+    expect(validarCampo('correo', 'ana@hotmial.com')).toBe('correoErrata');
+    expect(validarCampo('correo', 'ana@gmail.com')).toBeNull();
+  });
+
+  it('sugiere el dominio corregido', () => {
+    expect(sugerenciaDeCorreo('ana@gmial.com')).toBe('ana@gmail.com');
+    expect(sugerenciaDeCorreo('ANA@Gmail.CO')).toBe('ana@gmail.com');
+    expect(sugerenciaDeCorreo('ana@empresa.com')).toBeNull();
+    expect(sugerenciaDeCorreo('sin arroba')).toBeNull();
   });
 });
 
@@ -72,11 +91,21 @@ describe('teléfono, que es opcional', () => {
   it.each([
     ['300 555 4433', null],
     ['(605) 385-1122', null],
+    ['3005554433', null],
     ['+57 300 5554433', 'telefonoInvalido'],   // el prefijo lo pone el formulario, no se escribe
     ['no tengo', 'telefonoInvalido'],
-    ['12345', 'telefonoInvalido']              // demasiado corto
+    ['300-555-4433 ext 2', 'telefonoInvalido'],
+    ['12345', 'telefonoCorto'],
+    ['1234567890123456', 'telefonoLargo']
   ])('%s', (entrada, esperado) => {
     expect(validarCampo('telefono', entrada)).toBe(esperado);
+  });
+
+  it('cuenta dígitos, no caracteres: el formato no infla la longitud', () => {
+    // seis dígitos con mucha decoración sigue siendo válido
+    expect(validarCampo('telefono', '(12) 34-56')).toBeNull();
+    // cinco dígitos por muchos espacios que lleve, sigue siendo corto
+    expect(validarCampo('telefono', '1 2 3 4 5')).toBe('telefonoCorto');
   });
 });
 

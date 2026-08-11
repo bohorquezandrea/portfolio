@@ -2252,7 +2252,27 @@ section { padding: 110px 0; position: relative; }
   overflow: hidden;
 }
 
-.co-turnstile { margin: 6px 0 18px; min-height: 65px; }
+.co-antispam { margin: 6px 0 18px; }
+.co-turnstile { min-height: 65px; }
+
+.co-antispam-fallo {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  margin-top: 10px;
+  font-size: 0.9rem;
+  color: var(--on-noir-error);
+}
+.co-antispam-codigo {
+  font-variant-numeric: tabular-nums;
+  color: var(--on-noir-muted);
+}
+.co-btn-mini { padding: 8px 18px; font-size: 0.88rem; }
+
+/* La pista se reserva siempre para que los inputs de una misma fila
+   queden a la misma altura, tenga o no texto de ayuda cada campo. */
+.co-pista:empty::before { content: '\00a0'; }
 
 .co-avisos:empty { display: none; }
 .co-aviso-error { color: var(--on-noir-error); font-size: 0.9rem; margin: 0 0 14px; }

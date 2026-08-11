@@ -560,6 +560,7 @@ export const content = {
         correoVacio: 'Escribe tu correo',
         correoInvalido: 'Ese correo no parece válido. Revisa que tenga arroba y dominio.',
         correoLargo: 'Ese correo es demasiado largo',
+        correoErrata: 'Revisa el dominio, parece que hay una errata',
         proyectoVacio: 'Elige el tipo de proyecto',
         proyectoInvalido: 'Esa opción no existe',
         proyectoOtroVacio: 'Cuéntame qué tipo de proyecto es',
@@ -571,12 +572,20 @@ export const content = {
         paisVacio: 'Elige tu país',
         ciudadVacia: 'Escribe tu ciudad',
         ciudadLarga: 'Ese nombre es demasiado largo',
-        telefonoInvalido: 'Ese teléfono no parece válido. Solo números, espacios y guiones.',
+        telefonoInvalido: 'Solo números, espacios, guiones y paréntesis',
+        telefonoCorto: 'Faltan dígitos para que sea un número real',
+        telefonoLargo: 'Sobran dígitos. El código de país ya va aparte.',
         notaLarga: 'La nota es demasiado larga'
+      },
+      antispam: {
+        error: 'La verificación antispam no se pudo completar.',
+        expirado: 'La verificación caducó.',
+        reintentar: 'Reintentar'
       },
       // Errores de envío
       fallos: {
         titulo: 'No se pudo enviar',
+        antispamPendiente: 'Completa la verificación antispam antes de enviar. Si no aparece o falla, dale a Reintentar.',
         sinConfigurar: 'El formulario todavía no está conectado. Escríbeme directo a {correo} y lo vemos.',
         red: 'No hubo conexión con el servidor. Revisa tu internet e inténtalo otra vez.',
         demasiados: 'Se enviaron muchas consultas desde aquí en poco tiempo. Espera unos minutos.',
@@ -1150,6 +1159,7 @@ export const content = {
         correoVacio: 'Enter your email',
         correoInvalido: 'That email does not look valid. Check it has an @ and a domain.',
         correoLargo: 'That email is too long',
+        correoErrata: 'Check the domain, it looks like a typo',
         proyectoVacio: 'Pick the type of project',
         proyectoInvalido: 'That option does not exist',
         proyectoOtroVacio: 'Tell me what kind of project it is',
@@ -1161,11 +1171,19 @@ export const content = {
         paisVacio: 'Pick your country',
         ciudadVacia: 'Enter your city',
         ciudadLarga: 'That name is too long',
-        telefonoInvalido: 'That phone does not look valid. Digits, spaces and dashes only.',
+        telefonoInvalido: 'Digits, spaces, dashes and brackets only',
+        telefonoCorto: 'Too few digits for a real number',
+        telefonoLargo: 'Too many digits. The country code goes separately.',
         notaLarga: 'That note is too long'
+      },
+      antispam: {
+        error: 'The anti-spam check could not be completed.',
+        expirado: 'The check expired.',
+        reintentar: 'Try again'
       },
       fallos: {
         titulo: 'It could not be sent',
+        antispamPendiente: 'Complete the anti-spam check before sending. If it does not appear or it fails, hit Try again.',
         sinConfigurar: 'The form is not connected yet. Write me straight to {correo} and we will take it from there.',
         red: 'No connection to the server. Check your internet and try again.',
         demasiados: 'Too many messages were sent from here in a short time. Wait a few minutes.',
