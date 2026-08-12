@@ -27,6 +27,11 @@ Thumbs.db
 supabase/.temp/
 supabase/.branches/
 
+# Documentos de trabajo: guias de configuracion, especificaciones e
+# instrucciones. Son notas internas de Andrea, no contenido del proyecto,
+# y varias llevan pasos con su correo y sus cuentas.
+notas-privadas/
+
 # Registros y temporales
 *.log
 npm-debug.log*
