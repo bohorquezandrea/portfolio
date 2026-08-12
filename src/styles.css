@@ -2403,3 +2403,41 @@ section { padding: 110px 0; position: relative; }
   .co-enviar { width: auto; min-width: 260px; }
   .co-intro { font-size: 1.12rem; }
 }
+
+/* =====================================================
+   APARTADO TECNICO DE UNA TARJETA DE PROYECTO
+
+   Separado de la descripcion a proposito: la descripcion la lee quien
+   podria contratar, esto lo lee quien revisa el codigo. Mezclados no
+   los lee ninguno de los dos.
+   ===================================================== */
+.proj-tech {
+  margin-top: 20px;
+  padding: 18px 20px;
+  border-radius: 14px;
+  border: 1px solid var(--line);
+  background: color-mix(in srgb, var(--ink) 4%, transparent);
+}
+.proj-tech-titulo {
+  display: block;
+  margin-bottom: 8px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--rose);
+}
+.proj-tech p {
+  margin: 0;
+  font-size: 0.94rem;
+  line-height: 1.65;
+  color: var(--ink-muted);
+  max-width: 76ch;
+}
+/* Dentro de la tarjeta destacada, que es lavanda y no gira con el tema */
+.proj.is-featured .proj-tech {
+  border-color: var(--inv-line);
+  background: color-mix(in srgb, var(--inv-fg) 5%, transparent);
+}
+.proj.is-featured .proj-tech-titulo { color: var(--inv-accent); }
+.proj.is-featured .proj-tech p { color: var(--inv-fg-soft); }

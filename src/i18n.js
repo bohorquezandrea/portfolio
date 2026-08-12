@@ -42,6 +42,7 @@ export const content = {
       titleEm: 'por mi cuenta.',
       sub: 'Proyectos donde escribo cada capa: modelo de datos, API, interfaz y tests. Aquí no hay cliente que apruebe wireframes. Hay decisiones técnicas que sostengo yo.',
       stackLabel: 'Stack',
+      techLabel: 'Cómo está construido',
       shotsNext: 'Ver la siguiente pantalla',
       noLinkNote: 'Repositorio privado',
       items: [
@@ -77,6 +78,18 @@ export const content = {
         },
         {
           n: '02',
+          title: 'Sistema de Inscripciones',
+          titleEm: 'Automatizado',
+          year: '2026 · Proyecto demo',
+          role: 'Plataforma de inscripciones para eventos deportivos',
+          desc: 'Un club con 200 inscritos quema cerca de 400 horas al año en revisar formularios, perseguir comprobantes y confirmar por WhatsApp de uno en uno. Este sistema lo baja a cero: el deportista se inscribe solo, el formulario le verifica el documento y la edad ANTES de aceptar nada, y el organizador aprueba de un clic. La diferencia real está en la segunda competencia: no cuesta armar otro formulario, cuesta cambiar la fecha. Se monta una vez y sirve para todas las series y torneos que vengan.',
+          tech: 'Next.js con App Router y TypeScript. La validación son funciones puras que corren igual en el navegador y en el servidor, así que las reglas no se pueden saltar llamando al endpoint por fuera. Verifica de verdad el documento por país: la letra del DNI español, el dígito del RUT chileno, el módulo 10 de la cédula ecuatoriana. Los tiempos se guardan en centésimas para poder sembrar las series después sin volver a leer texto. Supabase con RLS para los datos y Vercel para el despliegue.',
+          stack: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind', 'Vercel', 'Claude Code'],
+          link: null,
+          note: 'Demo público en despliegue'
+        },
+        {
+          n: '03',
           title: 'Automatizaciones',
           img: 'claude-skills.webp',
           titleEm: 'con Claude Code',
@@ -88,7 +101,7 @@ export const content = {
           linkLabel: 'Leer el caso completo'
         },
         {
-          n: '03',
+          n: '04',
           title: 'Pimp',
           img: 'pimp-my-shoes.webp',
           titleEm: 'My Shoes',
@@ -100,7 +113,7 @@ export const content = {
           linkLabel: 'Ver la landing'
         },
         {
-          n: '04',
+          n: '05',
           title: 'Artist Finder',
           img: 'artist-finder.webp',
           titleEm: 'API',
@@ -112,7 +125,7 @@ export const content = {
           linkLabel: 'Abrir la app'
         },
         {
-          n: '05',
+          n: '06',
           title: 'Pokémon',
           img: 'pokemon-fetch.webp',
           titleEm: 'Fetch',
@@ -124,7 +137,7 @@ export const content = {
           linkLabel: 'Abrir la app'
         },
         {
-          n: '06',
+          n: '07',
           title: 'Simon',
           img: 'simon-game.webp',
           titleEm: 'Game',
@@ -645,6 +658,7 @@ export const content = {
       titleEm: 'on my own.',
       sub: 'Projects where I write every layer: data model, API, interface and tests. No client signing off wireframes here. Just technical decisions I own.',
       stackLabel: 'Stack',
+      techLabel: 'How it is built',
       shotsNext: 'See the next screen',
       noLinkNote: 'Private repository',
       items: [
@@ -680,6 +694,18 @@ export const content = {
         },
         {
           n: '02',
+          title: 'Registration System',
+          titleEm: 'Automated',
+          year: '2026 · Demo project',
+          role: 'Sports events registration platform',
+          desc: 'A club with 200 entrants burns around 400 hours a year checking forms, chasing payment receipts and confirming over WhatsApp one by one. This system takes that to zero: the athlete signs up alone, the form verifies their ID and age BEFORE accepting anything, and the organiser approves in one click. The real difference shows on the second event: it does not cost a new form, it costs changing the date. Built once, reused for every series and tournament that follows.',
+          tech: 'Next.js with the App Router and TypeScript. Validation lives in pure functions that run the same in the browser and on the server, so the rules cannot be skipped by calling the endpoint directly. It genuinely verifies the ID per country: the Spanish DNI letter, the Chilean RUT check digit, the modulo 10 of the Ecuadorian ID. Times are stored in hundredths so heats can be seeded later without re-reading text. Supabase with RLS for the data, Vercel for the deploy.',
+          stack: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind', 'Vercel', 'Claude Code'],
+          link: null,
+          note: 'Public demo being deployed'
+        },
+        {
+          n: '03',
           title: 'Automation',
           img: 'claude-skills.webp',
           titleEm: 'with Claude Code',
@@ -691,7 +717,7 @@ export const content = {
           linkLabel: 'Read the full case'
         },
         {
-          n: '03',
+          n: '04',
           title: 'Pimp',
           img: 'pimp-my-shoes.webp',
           titleEm: 'My Shoes',
@@ -703,7 +729,7 @@ export const content = {
           linkLabel: 'View the landing'
         },
         {
-          n: '04',
+          n: '05',
           title: 'Artist Finder',
           img: 'artist-finder.webp',
           titleEm: 'API',
@@ -715,7 +741,7 @@ export const content = {
           linkLabel: 'Open the app'
         },
         {
-          n: '05',
+          n: '06',
           title: 'Pokémon',
           img: 'pokemon-fetch.webp',
           titleEm: 'Fetch',
@@ -727,7 +753,7 @@ export const content = {
           linkLabel: 'Open the app'
         },
         {
-          n: '06',
+          n: '07',
           title: 'Simon',
           img: 'simon-game.webp',
           titleEm: 'Game',
