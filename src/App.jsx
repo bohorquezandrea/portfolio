@@ -473,15 +473,6 @@ function Portfolio({ t }) {
                 </h3>
                 <div className="proj-role">{p.role}</div>
                 <p className="proj-desc">{p.desc}</p>
-                {/* El apartado tecnico va aparte de la descripcion: quien
-                    contrata lee lo de arriba, quien revisa el codigo lee
-                    esto. Mezclarlos hace que ninguno de los dos lea. */}
-                {p.tech && (
-                  <div className="proj-tech">
-                    <span className="proj-tech-titulo">{t.portfolio.techLabel}</span>
-                    <p>{p.tech}</p>
-                  </div>
-                )}
                 <ul className="proj-stack" aria-label={t.portfolio.stackLabel}>
                   {p.stack.map((s, j) => (
                     <li key={j}>{s}</li>

@@ -82,11 +82,10 @@ export const content = {
           titleEm: 'Automatizado',
           year: '2026 · Proyecto demo',
           role: 'Plataforma de inscripciones para eventos deportivos',
-          desc: 'Un club con 200 inscritos quema cerca de 400 horas al año en revisar formularios, perseguir comprobantes y confirmar por WhatsApp de uno en uno. Este sistema lo baja a cero: el deportista se inscribe solo, el formulario le verifica el documento y la edad ANTES de aceptar nada, y el organizador aprueba de un clic. La diferencia real está en la segunda competencia: no cuesta armar otro formulario, cuesta cambiar la fecha. Se monta una vez y sirve para todas las series y torneos que vengan.',
-          tech: 'Next.js con App Router y TypeScript. La validación son funciones puras que corren igual en el navegador y en el servidor, así que las reglas no se pueden saltar llamando al endpoint por fuera. Verifica de verdad el documento por país: la letra del DNI español, el dígito del RUT chileno, el módulo 10 de la cédula ecuatoriana. Los tiempos se guardan en centésimas para poder sembrar las series después sin volver a leer texto. Supabase con RLS para los datos y Vercel para el despliegue.',
-          stack: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind', 'Vercel', 'Claude Code'],
-          link: null,
-          note: 'Demo público en despliegue'
+          desc: 'Un club con 200 inscritos quema cerca de 400 horas al año revisando formularios, persiguiendo comprobantes y confirmando por WhatsApp de uno en uno. Aquí el deportista se inscribe solo y el sistema le verifica el documento y la edad antes de aceptar nada. La segunda competencia no cuesta armar otro formulario: cuesta cambiar la fecha.',
+          stack: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind', 'Vitest'],
+          link: 'inscripciones/',
+          linkLabel: 'Probar el demo'
         },
         {
           n: '03',
@@ -698,11 +697,10 @@ export const content = {
           titleEm: 'Automated',
           year: '2026 · Demo project',
           role: 'Sports events registration platform',
-          desc: 'A club with 200 entrants burns around 400 hours a year checking forms, chasing payment receipts and confirming over WhatsApp one by one. This system takes that to zero: the athlete signs up alone, the form verifies their ID and age BEFORE accepting anything, and the organiser approves in one click. The real difference shows on the second event: it does not cost a new form, it costs changing the date. Built once, reused for every series and tournament that follows.',
-          tech: 'Next.js with the App Router and TypeScript. Validation lives in pure functions that run the same in the browser and on the server, so the rules cannot be skipped by calling the endpoint directly. It genuinely verifies the ID per country: the Spanish DNI letter, the Chilean RUT check digit, the modulo 10 of the Ecuadorian ID. Times are stored in hundredths so heats can be seeded later without re-reading text. Supabase with RLS for the data, Vercel for the deploy.',
-          stack: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind', 'Vercel', 'Claude Code'],
-          link: null,
-          note: 'Public demo being deployed'
+          desc: 'A club with 200 entrants burns around 400 hours a year checking forms, chasing receipts and confirming over WhatsApp one by one. Here the athlete signs up alone and the system verifies their ID and age before accepting anything. The second event does not cost a new form: it costs changing the date.',
+          stack: ['Next.js', 'TypeScript', 'Supabase', 'Tailwind', 'Vitest'],
+          link: 'inscripciones/',
+          linkLabel: 'Try the demo'
         },
         {
           n: '03',
