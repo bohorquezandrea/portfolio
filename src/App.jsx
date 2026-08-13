@@ -1050,6 +1050,8 @@ function Footer({ t }) {
           <div>
             <h5>{t.footer.menuTitle}</h5>
             <a href="#services">{t.nav.services}</a>
+            {/* Ruta estatica servida desde public/, no es ancla de la SPA */}
+            <a href={`${import.meta.env.BASE_URL}skills/`}>{t.footer.skillsLink}</a>
             <a href="#stack">{t.nav.stack}</a>
             <a href="#work">{t.nav.work}</a>
             <a href="#faq">{t.nav.faq}</a>

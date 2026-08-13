@@ -615,6 +615,7 @@ export const content = {
       city: 'Barranquilla, Colombia · trabajo remoto',
       socialTitle: 'Sígueme',
       menuTitle: 'Menú',
+      skillsLink: 'Claude Skills',
       linkedin: 'https://www.linkedin.com/in/bohorquezandrea/',
       github: 'https://github.com/bohorquezandrea',
       copy: '© 2026 Andrea Bohorquez'
@@ -1225,6 +1226,7 @@ export const content = {
       city: 'Barranquilla, Colombia · remote work',
       socialTitle: 'Follow',
       menuTitle: 'Menu',
+      skillsLink: 'Claude Skills',
       linkedin: 'https://www.linkedin.com/in/bohorquezandrea/',
       github: 'https://github.com/bohorquezandrea',
       copy: '© 2026 Andrea Bohorquez'

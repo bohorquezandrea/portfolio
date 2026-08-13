@@ -1,0 +1,304 @@
+<!doctype html>
+<html lang="es" data-theme="light">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Claude Skills · Andrea Bohorquez</title>
+<meta name="description" content="Las herramientas que construyo para que mi trabajo no dependa de acordarme. Automatizaciones reales con Claude Code, medidas y verificadas.">
+<meta property="og:title" content="Claude Skills · Andrea Bohorquez">
+<meta property="og:description" content="No uso IA para escribir código más rápido. Construyo las herramientas que hacen que el trabajo salga igual de bien la vez veinte que la primera.">
+<meta property="og:url" content="https://andreabohorquez.com/skills/">
+<meta property="og:image" content="https://andreabohorquez.com/og.png">
+<link rel="icon" href="/favicon-32.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<script>
+/* El tema se aplica antes del primer pintado: si se deja a un script al
+   final, la página aparece un instante en claro y salta a oscuro. */
+(function(){try{var g=localStorage.getItem('tema');
+document.documentElement.setAttribute('data-theme',g==='dark'?'dark':'light');}
+catch(e){document.documentElement.setAttribute('data-theme','light');}})();
+</script>
+<style>
+:root{
+  --fondo:#EDF2ED; --superficie:#FFFFFF; --superficie-2:#F6F9F6;
+  --tinta:#10231C; --tinta-suave:#354A40; --tinta-tenue:#4E6157;
+  --acento:#5B3FA8; --acento-fondo:#EFEAFB; --linea:#D3DED6; --linea-fuerte:#B6C7BC;
+  --sombra:0 1px 2px rgba(16,35,28,.05),0 8px 24px -12px rgba(16,35,28,.12);
+}
+[data-theme='dark']{
+  --fondo:#10231C; --superficie:#163026; --superficie-2:#1B3B2F;
+  --tinta:#F5EEE0; --tinta-suave:#C3D6CC; --tinta-tenue:#8FA89C;
+  --acento:#C9B8F5; --acento-fondo:rgba(201,184,245,.12); --linea:#22453A; --linea-fuerte:#2F5A4A;
+  --sombra:0 1px 2px rgba(4,12,9,.30),0 12px 32px -14px rgba(4,12,9,.55);
+}
+html{color-scheme:light} [data-theme='dark']{color-scheme:dark}
+*{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--fondo);color:var(--tinta);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;-webkit-font-smoothing:antialiased;
+  transition:background-color .35s ease,color .35s ease}
+.envoltura{max-width:64rem;margin:0 auto;padding:0 1.25rem}
+a{color:inherit}
+
+/* Cabecera */
+.barra{border-bottom:1px solid var(--linea);background:var(--superficie)}
+.barra .envoltura{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:1.15rem}
+.marca{font-weight:700;letter-spacing:-.01em;text-decoration:none}
+.marca span{color:var(--acento)}
+.tema{width:2.5rem;height:2.5rem;display:grid;place-items:center;border-radius:999px;
+  border:1px solid var(--linea);background:none;color:var(--tinta-suave);cursor:pointer;
+  transition:border-color .25s,color .25s}
+.tema:hover{border-color:var(--acento);color:var(--acento)}
+
+/* Portada */
+.portada{padding:4.5rem 0 3rem}
+.gorro{font-size:.72rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--acento)}
+h1{font-size:clamp(2.1rem,5.5vw,3.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.08;margin-top:.9rem}
+h1 em{font-style:normal;color:var(--acento)}
+.entrada{margin-top:1.5rem;max-width:44rem;font-size:1.1rem;line-height:1.65;color:var(--tinta-suave)}
+
+/* Cifras */
+.cifras{display:grid;gap:1rem;grid-template-columns:repeat(auto-fit,minmax(12rem,1fr));margin-top:3rem}
+.cifra{border:1px solid var(--linea);border-radius:1.15rem;background:var(--superficie);padding:1.5rem}
+.cifra b{display:block;font-size:2rem;font-weight:800;letter-spacing:-.02em;color:var(--acento);
+  font-variant-numeric:tabular-nums}
+.cifra span{display:block;margin-top:.5rem;font-size:.9rem;line-height:1.5;color:var(--tinta-tenue)}
+
+/* Secciones */
+section{padding:3.5rem 0}
+h2{font-size:clamp(1.6rem,3.5vw,2.15rem);font-weight:700;letter-spacing:-.02em;line-height:1.15}
+.bajada{margin-top:1rem;max-width:44rem;line-height:1.65;color:var(--tinta-suave)}
+
+/* Tarjetas de skill */
+.rejilla{display:grid;gap:1.15rem;margin-top:2.5rem}
+@media(min-width:52rem){.rejilla{grid-template-columns:1fr 1fr}}
+.skill{border:1px solid var(--linea);border-radius:1.25rem;background:var(--superficie);
+  padding:1.75rem;box-shadow:var(--sombra)}
+.skill.ancha{grid-column:1/-1}
+.skill .etiqueta{display:inline-block;font-size:.68rem;font-weight:700;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--acento);background:var(--acento-fondo);
+  padding:.35rem .7rem;border-radius:999px}
+.skill h3{margin-top:1rem;font-size:1.25rem;font-weight:700;letter-spacing:-.01em}
+.skill .duele{margin-top:.9rem;font-size:.95rem;line-height:1.65;color:var(--tinta-suave)}
+.skill .hace{margin-top:1rem;padding-top:1rem;border-top:1px solid var(--linea);
+  font-size:.95rem;line-height:1.65;color:var(--tinta-suave)}
+.skill .hace b{color:var(--tinta)}
+.prueba{margin-top:1rem;padding:.85rem 1rem;border-radius:.85rem;background:var(--superficie-2);
+  font-size:.87rem;line-height:1.6;color:var(--tinta-tenue)}
+.prueba b{color:var(--tinta)}
+
+/* Bloque del post */
+.post{border:1px solid var(--linea);border-radius:1.25rem;background:var(--superficie);
+  padding:2rem;box-shadow:var(--sombra);margin-top:2.5rem}
+.post p{margin-top:1rem;line-height:1.7;color:var(--tinta-suave)}
+.enlace{display:inline-flex;align-items:center;gap:.5rem;margin-top:1.5rem;
+  font-weight:600;color:var(--acento);text-decoration:none}
+.enlace:hover{text-decoration:underline;text-underline-offset:.3em}
+
+/* Cierre */
+.cierre{border:1px solid var(--linea);border-radius:1.5rem;background:var(--superficie);
+  padding:2.5rem;text-align:center;box-shadow:var(--sombra)}
+.cierre p{margin-top:1rem;max-width:38rem;margin-inline:auto;line-height:1.65;color:var(--tinta-suave)}
+.boton{display:inline-block;margin-top:1.75rem;padding:.95rem 2.25rem;border-radius:999px;
+  background:var(--acento);color:var(--fondo);font-weight:700;text-decoration:none;
+  transition:transform .25s}
+.boton:hover{transform:translateY(-2px)}
+footer{border-top:1px solid var(--linea);padding:2.5rem 0;font-size:.87rem;color:var(--tinta-tenue)}
+@media(prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="barra">
+  <div class="envoltura">
+    <a class="marca" href="/">Andrea <span>Bohorquez</span></a>
+    <button class="tema" id="tema" aria-label="Cambiar tema"><span aria-hidden="true">☾</span></button>
+  </div>
+</div>
+
+<header class="portada">
+  <div class="envoltura">
+    <p class="gorro">Claude Skills</p>
+    <h1>No uso IA para escribir código<br><em>más rápido.</em></h1>
+    <p class="entrada">
+      La uso para que el trabajo salga igual de bien la vez veinte que la primera. Cada
+      cosa que hago dos veces se convierte en una herramienta: el procedimiento, las
+      comprobaciones y los errores que ya cometí, escritos una vez y aplicados siempre.
+      Eso es lo que estás mirando aquí.
+    </p>
+
+    <div class="cifras">
+      <div class="cifra"><b>4 a 6 h</b><span>semanales que dejo de gastar en trabajo repetitivo</span></div>
+      <div class="cifra"><b>4 días</b><span>de entrega promedio para una landing completa</span></div>
+      <div class="cifra"><b>6+</b><span>marcas que ya confiaron en este proceso</span></div>
+    </div>
+  </div>
+</header>
+
+<section>
+  <div class="envoltura">
+    <h2>El problema que nadie te cuenta cuando contratas a alguien</h2>
+    <p class="bajada">
+      No es que no sepa hacer el trabajo. Es que la calidad depende de si esa persona se
+      acordó de comprobar. La primera entrega sale impecable porque hay atención. La
+      quinta sale peor, no por dejadez, sino porque nadie recuerda los doce detalles que
+      había que revisar. Ahí es donde se cuelan los fallos que el cliente encuentra
+      después.
+    </p>
+    <p class="bajada">
+      Yo lo resolví al revés: en vez de confiar en mi memoria, escribo la comprobación.
+      Una vez. Y a partir de ahí se aplica sola, en cada proyecto, sin que yo tenga que
+      acordarme de nada.
+    </p>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <h2>Las herramientas</h2>
+    <p class="bajada">
+      Cada una nació de un problema concreto que me costó tiempo o me hizo entregar algo
+      con un fallo. No son ideas: son correcciones.
+    </p>
+
+    <div class="rejilla">
+
+      <article class="skill ancha">
+        <span class="etiqueta">Cliente real · Olímpica</span>
+        <h3>Conversor a VTEX</h3>
+        <p class="duele">
+          Cada ficha de producto enriquecida había que adaptarla a mano a la plataforma:
+          renombrar todas las clases con un prefijo, sustituir los selectores globales que
+          se pisaban entre fichas y revisar que no se rompiera nada visualmente. Una tarde
+          entera por ficha, y el riesgo de que un selector suelto tumbara la maquetación de
+          otro producto ya publicado.
+        </p>
+        <p class="hace">
+          <b>Ahora:</b> pego el código y sale convertido, con el prefijo aplicado, los
+          selectores globales acotados y la fidelidad visual intacta. Lo que era una tarde
+          es un minuto, y el error de pisar otra ficha simplemente ya no puede ocurrir.
+        </p>
+        <div class="prueba">
+          <b>Por qué importa para ti:</b> esto es exactamente lo que hago con el trabajo
+          repetitivo de cualquier operación. Si en tu equipo hay algo que se hace igual
+          veinte veces al mes, se puede convertir en esto.
+        </div>
+      </article>
+
+      <article class="skill">
+        <span class="etiqueta">Calidad</span>
+        <h3>Auditoría de contraste</h3>
+        <p class="duele">
+          Los colores que "se ven bien" no son un criterio. Hay texto que se lee perfecto
+          en tu pantalla y es ilegible en la de tu cliente, y no hay forma de saberlo
+          mirando.
+        </p>
+        <p class="hace">
+          <b>Mide</b> cada texto contra su fondo real, contando degradados,
+          transparencias y capas superpuestas, en tema claro y oscuro, en móvil y
+          escritorio. Devuelve el número, no una opinión.
+        </p>
+        <div class="prueba">
+          <b>Y se comprueba a sí misma.</b> Tiene su propia batería de pruebas, incluida
+          una que <em>tiene</em> que fallar. Si deja de fallar, la herramienta se rompió y
+          me entero antes de fiarme de ella.
+        </div>
+      </article>
+
+      <article class="skill">
+        <span class="etiqueta">Consistencia</span>
+        <h3>Proyecto nuevo</h3>
+        <p class="duele">
+          Cada pieza que añades a una web se parece un poco menos a la anterior. Textos
+          más largos, estilos que se desvían, versiones en inglés que se quedan atrás. En
+          seis meses la web parece hecha por cuatro personas distintas.
+        </p>
+        <p class="hace">
+          <b>Fija el ritual:</b> mide la longitud del texto contra las piezas que ya
+          existen, comprueba que los dos idiomas tienen lo mismo, revisa el contraste y
+          verifica el despliegue. En ese orden, siempre.
+        </p>
+        <div class="prueba">
+          <b>Por qué existe:</b> añadí una pieza a ojo y salió del doble de larga que las
+          demás. Descuadró la sección entera y hubo que rehacerla.
+        </div>
+      </article>
+
+      <article class="skill ancha">
+        <span class="etiqueta">Producción</span>
+        <h3>Publicar con verificación</h3>
+        <p class="duele">
+          Un despliegue en verde no significa que lo que está vivo sea lo tuyo. Puede
+          haber terminado correctamente y estar sirviendo otra cosa. La mayoría de la
+          gente no lo comprueba: mira que el indicador esté verde y da por hecho el resto.
+        </p>
+        <p class="hace">
+          <b>Compara</b> lo que está publicado contra lo que se acaba de compilar, busca
+          credenciales antes de subir nada y confirma que las rutas nuevas responden y
+          cargan de verdad. Solo entonces se dice que está publicado.
+        </p>
+        <div class="prueba">
+          <b>Por qué existe:</b> destapó que el servidor estaba sirviendo el código sin
+          compilar, y una clave real dentro de un archivo de ejemplo. Las dos cosas habrían
+          pasado desapercibidas.
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <h2>Dónde se ve esto funcionando</h2>
+    <div class="post">
+      <span class="etiqueta">LinkedIn · Tucan</span>
+      <h3 style="margin-top:1rem;font-size:1.25rem;font-weight:700">
+        Cómo automaticé con Claude Code el trabajo repetitivo de una agencia
+      </h3>
+      <p>
+        Escribí sobre el caso completo: qué proceso concreto se automatizó, cómo se
+        construyó y qué cambió en el día a día del equipo. No es teoría sobre IA, es lo
+        que pasó cuando se aplicó a un flujo real con clientes enterprise detrás.
+      </p>
+      <a class="enlace" href="https://www.linkedin.com/feed/update/urn:li:activity:7488971086550970368/"
+         target="_blank" rel="noreferrer">Leer el caso en LinkedIn ↗</a>
+    </div>
+  </div>
+</section>
+
+<section>
+  <div class="envoltura">
+    <div class="cierre">
+      <h2>¿Hay algo en tu operación que se repite?</h2>
+      <p>
+        Si en tu equipo hay una tarea que se hace igual varias veces por semana, se puede
+        convertir en una herramienta. Cuéntame cuál es y te digo con franqueza si vale la
+        pena automatizarla o si te sale más a cuenta dejarla como está.
+      </p>
+      <a class="boton" href="/#cta">Hablemos</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="envoltura">
+    Andrea Bohorquez · AI Product Engineer y Full-Stack Web Developer · Barranquilla, Colombia
+  </div>
+</footer>
+
+<script>
+document.getElementById('tema').addEventListener('click', function () {
+  var actual = document.documentElement.getAttribute('data-theme');
+  var nuevo = actual === 'dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', nuevo);
+  try { localStorage.setItem('tema', nuevo); } catch (e) {}
+  this.firstElementChild.textContent = nuevo === 'dark' ? '☀' : '☾';
+});
+if (document.documentElement.getAttribute('data-theme') === 'dark') {
+  document.getElementById('tema').firstElementChild.textContent = '☀';
+}
+</script>
+</body>
+</html>
