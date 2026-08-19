@@ -599,11 +599,13 @@ export const content = {
         titulo: 'No se pudo enviar',
         antispamPendiente: 'Completa la verificación antispam antes de enviar. Si no aparece o falla, dale a Reintentar.',
         sinConfigurar: 'El formulario todavía no está conectado. Escríbeme directo a {correo} y lo vemos.',
-        red: 'No hubo conexión con el servidor. Revisa tu internet e inténtalo otra vez.',
+        red: 'No se pudo conectar con el servidor. Puede ser cosa mía, no tuya.',
         demasiados: 'Se enviaron muchas consultas desde aquí en poco tiempo. Espera unos minutos.',
         antispam: 'La verificación antispam no pasó. Marca la casilla e inténtalo de nuevo.',
         validacion: 'Algún dato no pasó la validación del servidor. Revisa el formulario.',
         servidor: 'Algo falló de mi lado. Inténtalo otra vez o escríbeme a {correo}.',
+        rescateBoton: 'Mándamelo por correo sin volver a escribirlo',
+        rescateAsunto: 'Consulta desde andreabohorquez.com',
         reintentar: 'Intentar de nuevo'
       },
       revisaCampos: 'Revisa los campos marcados antes de enviar.'
@@ -1210,11 +1212,13 @@ export const content = {
         titulo: 'It could not be sent',
         antispamPendiente: 'Complete the anti-spam check before sending. If it does not appear or it fails, hit Try again.',
         sinConfigurar: 'The form is not connected yet. Write me straight to {correo} and we will take it from there.',
-        red: 'No connection to the server. Check your internet and try again.',
+        red: 'The server could not be reached. This may be on my end, not yours.',
         demasiados: 'Too many messages were sent from here in a short time. Wait a few minutes.',
         antispam: 'The anti-spam check did not pass. Tick the box and try again.',
         validacion: 'Some field did not pass the server validation. Check the form.',
         servidor: 'Something failed on my side. Try again or write me at {correo}.',
+        rescateBoton: 'Send it to me by email without retyping it',
+        rescateAsunto: 'Enquiry from andreabohorquez.com',
         reintentar: 'Try again'
       },
       revisaCampos: 'Check the marked fields before sending.'

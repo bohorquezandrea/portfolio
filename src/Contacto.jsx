@@ -261,6 +261,47 @@ export default function Contacto({ t, idioma, tema }) {
   const ciudades = useMemo(() => ciudadesDe(datos.pais), [datos.pais]);
   const prefijo = datos.pais ? prefijoDe(datos.pais) : '';
 
+  /* Vía de rescate.
+
+     Si el envío falla por algo que no depende de quien escribe (el backend
+     caído, el proyecto pausado, las variables sin poner), el lead se pierde
+     en silencio: la persona ve un error, cierra la pestaña y no vuelve. Esto
+     arma un correo con todo lo que ya tecleó, para que llegue igual sin
+     tener que escribirlo otra vez.
+
+     Se calcula aquí y no al fallar porque `datos` ya está a mano y así el
+     enlace está listo en el mismo instante en que aparece el aviso. */
+  const enlaceRescate = useMemo(() => {
+    const linea = (etiqueta, valor) => (valor ? `${etiqueta}: ${valor}\n` : '');
+    const proyecto = datos.proyecto === 'otro'
+      ? datos.proyectoOtro
+      : (t.contacto.proyectoOpciones?.[datos.proyecto] || datos.proyecto);
+    const metodo = datos.metodo === 'otro'
+      ? datos.metodoOtro
+      : (t.contacto.metodoOpciones?.[datos.metodo] || datos.metodo);
+
+    const cuerpo =
+      linea(t.contacto.nombre, datos.nombre) +
+      linea(t.contacto.correo, datos.correo) +
+      linea(t.contacto.pais, paises.todos.find((x) => x.iso === datos.pais)?.nombre || datos.pais) +
+      linea(t.contacto.ciudad, datos.ciudad) +
+      linea(t.contacto.telefono, datos.telefono ? `+${prefijo} ${datos.telefono}` : '') +
+      linea(t.contacto.proyecto, proyecto) +
+      linea(t.contacto.metodo, metodo) +
+      (datos.nota ? `\n${datos.nota}\n` : '');
+
+    return `mailto:${t.footer.email}`
+      + `?subject=${encodeURIComponent(t.contacto.fallos.rescateAsunto)}`
+      + `&body=${encodeURIComponent(cuerpo)}`;
+  }, [datos, prefijo, paises, t]);
+
+  /* Fallos donde la culpa NO es de quien escribe: ahí se ofrece el rescate.
+     En los otros (antispam, validación, demasiados envíos) reintentar es lo
+     correcto y ofrecer un correo solo distrae. */
+  const fallaDeMiLado = falloEnvio === 'red'
+    || falloEnvio === 'servidor'
+    || falloEnvio === 'sinConfigurar';
+
   useEffect(() => () => abortRef.current?.abort(), []);
 
   const textoError = (campo) => {
@@ -552,6 +593,13 @@ export default function Contacto({ t, idioma, tema }) {
                 <strong>{t.contacto.fallos.titulo}</strong>
                 <span>{rellenar(t.contacto.fallos[falloEnvio] || t.contacto.fallos.servidor,
                                 { correo: t.footer.email })}</span>
+                {/* El lead no se pierde aunque el backend esté caído. */}
+                {fallaDeMiLado && (
+                  <a className="co-rescate" href={enlaceRescate}>
+                    {t.contacto.fallos.rescateBoton}
+                    <span className="arrow" aria-hidden="true">→</span>
+                  </a>
+                )}
               </div>
             )}
           </div>

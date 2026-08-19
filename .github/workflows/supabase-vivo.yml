@@ -1,0 +1,94 @@
+# =============================================================
+# Mantener Supabase despierto, y enterarse si se cae
+#
+# El plan gratuito de Supabase pausa un proyecto tras unos días sin
+# recibir una sola petición. Cuando eso pasa, el formulario de contacto
+# del sitio deja de funcionar y no avisa a nadie: quien escribe ve un
+# error, se va, y ese contacto se pierde sin dejar rastro.
+#
+# Esto ya ocurrió. Este flujo hace dos cosas:
+#
+#   1. Toca la base cada pocos días, que es lo que cuenta como actividad
+#      y evita la pausa.
+#   2. Falla en rojo si no responde. Un flujo en rojo manda un correo,
+#      que es justo el aviso que no hubo la primera vez.
+#
+# El segundo punto importa más que el primero: mantenerlo despierto
+# puede fallar por motivos ajenos (cuota agotada, incidencia de
+# Supabase), y en ese caso lo único que salva el formulario es
+# enterarse pronto.
+# =============================================================
+
+name: Supabase vivo
+
+on:
+  schedule:
+    # Cada tres días. El límite de la pausa son siete, así que aunque se
+    # salte una ejecución (GitHub retrasa los cron cuando hay carga)
+    # todavía queda margen antes de que se duerma.
+    - cron: '0 9 */3 * *'
+  workflow_dispatch:        # para poder lanzarlo a mano tras restaurarlo
+
+permissions:
+  contents: read
+
+jobs:
+  comprobar:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Tocar la base y comprobar que responde
+        env:
+          URL: ${{ secrets.VITE_SUPABASE_URL }}
+          CLAVE: ${{ secrets.VITE_SUPABASE_ANON_KEY }}
+        run: |
+          if [ -z "$URL" ] || [ -z "$CLAVE" ]; then
+            echo "Faltan los secrets VITE_SUPABASE_URL o VITE_SUPABASE_ANON_KEY."
+            echo "Se ponen en Settings -> Secrets and variables -> Actions."
+            exit 1
+          fi
+
+          # Se pide una fila y se descarta. Da igual lo que devuelva: lo que
+          # cuenta como actividad es que la petición llegue. Con RLS puesto
+          # la respuesta viene vacía, que es justo lo que se espera.
+          codigo=$(curl -s -o /tmp/respuesta -w "%{http_code}" --max-time 30 \
+            "$URL/rest/v1/leads?select=id&limit=1" \
+            -H "apikey: $CLAVE" \
+            -H "Authorization: Bearer $CLAVE")
+
+          echo "HTTP $codigo"
+
+          # 200 y 401 significan las dos que el proyecto está en pie: 401 es
+          # una respuesta, y un proyecto pausado no responde nada.
+          case "$codigo" in
+            200|401|403|404)
+              echo "El proyecto responde. No se va a pausar."
+              ;;
+            000)
+              echo "::error::El proyecto no resuelve. Está pausado o borrado."
+              echo "Entra a supabase.com/dashboard y púlsalo en Restore."
+              exit 1
+              ;;
+            *)
+              echo "::error::Respuesta inesperada: HTTP $codigo"
+              head -c 400 /tmp/respuesta || true
+              exit 1
+              ;;
+          esac
+
+      - name: Comprobar que la función del formulario sigue publicada
+        env:
+          URL: ${{ secrets.VITE_SUPABASE_URL }}
+        run: |
+          # La base puede estar viva y la Edge Function no estar desplegada.
+          # Son dos fallos distintos y el formulario se rompe igual con
+          # cualquiera de los dos, así que se comprueban por separado.
+          codigo=$(curl -s -o /dev/null -w "%{http_code}" --max-time 30 \
+            -X OPTIONS "$URL/functions/v1/lead")
+          echo "OPTIONS /functions/v1/lead -> HTTP $codigo"
+
+          if [ "$codigo" = "000" ] || [ "$codigo" = "404" ]; then
+            echo "::error::La función 'lead' no responde. El formulario no puede enviar."
+            echo "Se vuelve a desplegar con: supabase functions deploy lead"
+            exit 1
+          fi
+          echo "La función responde."

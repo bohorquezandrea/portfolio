@@ -2441,3 +2441,32 @@ section { padding: 110px 0; position: relative; }
 }
 .proj.is-featured .proj-tech-titulo { color: var(--inv-accent); }
 .proj.is-featured .proj-tech p { color: var(--inv-fg-soft); }
+
+
+/* Vía de rescate del formulario.
+
+   Aparece dentro del aviso de fallo cuando el backend no responde. Es un
+   enlace, no un botón, porque abre el cliente de correo: se comporta como
+   lo que es. Hereda los tokens del aviso, así no hay color nuevo. */
+.co-rescate {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  margin-top: .85rem;
+  padding: .7rem 1.15rem;
+  border: 1px solid currentColor;
+  border-radius: 999px;
+  font-size: .92rem;
+  font-weight: 600;
+  line-height: 1.2;
+  text-decoration: none;
+  color: inherit;
+  transition: background-color .25s ease, transform .25s ease;
+}
+.co-rescate:hover { transform: translateY(-1px); }
+.co-rescate .arrow { transition: transform .25s ease; }
+.co-rescate:hover .arrow { transform: translateX(3px); }
+@media (prefers-reduced-motion: reduce) {
+  .co-rescate, .co-rescate .arrow { transition: none; }
+  .co-rescate:hover, .co-rescate:hover .arrow { transform: none; }
+}
