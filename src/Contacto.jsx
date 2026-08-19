@@ -504,18 +504,31 @@ export default function Contacto({ t, idioma, tema }) {
               )}
             </div>
 
-            <div className="co-campo co-ancho">
+            <div className={`co-campo co-ancho${textoError('nota') ? ' tiene-error' : ''}`}>
               <label htmlFor={idDe('nota')} className="co-etiqueta">
                 {t.contacto.nota}
-                <span className="co-opcional"> ({t.contacto.opcional})</span>
               </label>
               <span id={`${idDe('nota')}-pista`} className="co-pista">{t.contacto.notaPista}</span>
+              {/* El id del error solo entra en aria-describedby cuando existe:
+                  apuntar a un elemento que no está en el DOM deja al lector de
+                  pantalla sin leer nada. */}
               <textarea id={idDe('nota')} name="nota" rows={4} maxLength={LIMITE_NOTA}
-                        aria-describedby={`${idDe('nota')}-pista ${idDe('nota')}-cuenta`}
+                        required aria-required="true"
+                        aria-invalid={textoError('nota') ? 'true' : undefined}
+                        aria-describedby={[
+                          `${idDe('nota')}-pista`,
+                          `${idDe('nota')}-cuenta`,
+                          textoError('nota') ? `${idDe('nota')}-error` : null
+                        ].filter(Boolean).join(' ')}
                         value={datos.nota} onChange={cambiar('nota')} onBlur={salir('nota')} />
               <span id={`${idDe('nota')}-cuenta`} className="co-cuenta">
                 {LIMITE_NOTA - datos.nota.length} {t.contacto.restantes}
               </span>
+              {textoError('nota') && (
+                <span id={`${idDe('nota')}-error`} className="co-error" role="alert">
+                  {textoError('nota')}
+                </span>
+              )}
             </div>
           </fieldset>
 

@@ -22,10 +22,10 @@ describe('validarTodo', () => {
     expect(esValido(VALIDO)).toBe(true);
   });
 
-  it('exige los seis campos obligatorios y ninguno más', () => {
+  it('exige los siete campos obligatorios y ninguno más', () => {
     const errores = validarTodo({});
     expect(Object.keys(errores).sort()).toEqual(
-      ['ciudad', 'correo', 'metodo', 'nombre', 'pais', 'proyecto'].sort()
+      ['ciudad', 'correo', 'metodo', 'nombre', 'nota', 'pais', 'proyecto'].sort()
     );
   });
 });
@@ -121,6 +121,38 @@ describe('valores fuera del catálogo', () => {
   it('acepta todos los del catálogo', () => {
     PROYECTOS.forEach((p) => expect(validarCampo('proyecto', p)).toBeNull());
     METODOS_CONTACTO.forEach((m) => expect(validarCampo('metodo', m)).toBeNull());
+  });
+});
+
+/* La nota pasó a ser obligatoria: una consulta sin contexto obliga a una
+   llamada entera solo para averiguar de qué va. */
+describe('la nota es obligatoria', () => {
+  it('rechaza la nota vacía', () => {
+    expect(validarCampo('nota', '')).toBe('notaVacia');
+    expect(validarCampo('nota', '   ')).toBe('notaVacia');
+  });
+
+  it('rechaza el relleno que solo cumple con estar ahí', () => {
+    expect(validarCampo('nota', 'hola')).toBe('notaCorta');
+    expect(validarCampo('nota', '.')).toBe('notaCorta');
+  });
+
+  it('rechaza texto largo sin una sola letra', () => {
+    // Pasa la cuenta de caracteres pero no dice absolutamente nada
+    expect(validarCampo('nota', '1234567890123456789012345')).toBe('notaSinLetras');
+  });
+
+  it('acepta una frase corta de verdad', () => {
+    expect(validarCampo('nota', 'Necesito una web para mi clínica')).toBeNull();
+  });
+
+  it('cuenta como letras las tildes y la ñ', () => {
+    expect(validarCampo('nota', 'Añadir inscripción en línea')).toBeNull();
+  });
+
+  it('un lead sin nota no es válido de conjunto', () => {
+    expect(esValido({ ...VALIDO, nota: '' })).toBe(false);
+    expect(validarTodo({ ...VALIDO, nota: '' }).nota).toBe('notaVacia');
   });
 });
 

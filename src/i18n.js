@@ -587,6 +587,9 @@ export const content = {
         telefonoInvalido: 'Solo números, espacios, guiones y paréntesis',
         telefonoCorto: 'Faltan dígitos para que sea un número real',
         telefonoLargo: 'Sobran dígitos. El código de país ya va aparte.',
+        notaVacia: 'Cuéntame de qué va el proyecto, aunque sea en dos frases',
+        notaCorta: 'Un poco más de contexto: con dos frases me sobra',
+        notaSinLetras: 'Escríbelo con palabras',
         notaLarga: 'La nota es demasiado larga'
       },
       antispam: {
@@ -1201,6 +1204,9 @@ export const content = {
         telefonoInvalido: 'Digits, spaces, dashes and brackets only',
         telefonoCorto: 'Too few digits for a real number',
         telefonoLargo: 'Too many digits. The country code goes separately.',
+        notaVacia: 'Tell me what the project is about, two sentences is enough',
+        notaCorta: 'A bit more context: two sentences will do',
+        notaSinLetras: 'Write it in words',
         notaLarga: 'That note is too long'
       },
       antispam: {

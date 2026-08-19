@@ -67,6 +67,10 @@ function validar(d: Record<string, unknown>): string | null {
   if (d.metodo === 'otro' && !texto(d.metodoOtro, 80)) return 'metodoOtro';
   if (!texto(d.pais, 2)) return 'pais';
   if (!texto(d.ciudad, 80)) return 'ciudad';
+  // La nota es obligatoria. Aquí es donde de verdad se exige: al
+  // navegador se le puede dar la vuelta llamando a esta función con curl.
+  const nota = texto(d.nota, 1500);
+  if (nota.length < 20 || !/\p{L}/u.test(nota)) return 'nota';
   return null;
 }
 

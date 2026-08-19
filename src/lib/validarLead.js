@@ -119,7 +119,21 @@ export function validarCampo(campo, valor, datos = {}) {
       return null;
     }
 
+    /* La nota es obligatoria a propósito.
+
+       Una consulta sin contexto obliga a una llamada de descubrimiento
+       entera solo para averiguar de qué va, y esa llamada se paga con
+       tiempo. Pedir dos frases aquí filtra al que no tiene nada concreto
+       y ahorra esa llamada.
+
+       El mínimo no es "no vacío": con eso basta un punto. Se piden 20
+       caracteres, que es una frase corta de verdad ("necesito una web
+       para mi clínica"), y que además haya letras, porque "........."
+       pasa cualquier cuenta de caracteres. */
     case 'nota':
+      if (!v) return 'notaVacia';
+      if (v.length < 20) return 'notaCorta';
+      if (!/\p{L}/u.test(v)) return 'notaSinLetras';
       if (v.length > 1500) return 'notaLarga';
       return null;
 
